@@ -1,0 +1,64 @@
+.our-testimony{
+    margin: 0 auto;
+    width: 85%;
+    height: fit-content;
+}
+.our-testimony h5{
+    font-size: 32px;
+    font-weight: bolder;
+    /*background-color: var(--primary);*/
+    padding: 18px 0 18px 5%;
+    width: 50%;
+    transform: translateY(50%);
+    overflow: hidden;
+}
+.our-testimony h5::before {
+    content: "";
+    z-index: -1; /* Move the pseudo-element behind the parent content */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--primary);
+    transform: skewX(30deg); /* Inclinaison du côté droit de 30 degrés (négatif pour l'inclinaison vers la droite) */
+    transform-origin: bottom right; /* Point d'origine de la transformation */
+}
+.our-testimony .container{
+    height: fit-content;
+    padding-top: 3.25%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    position: relative;
+    z-index: -1;
+}
+.Box-slider{
+    background-color: var(--standard);
+    color: var(--dark);
+    z-index: 10;
+}
+.our-testimony p.notice{
+    color: var(--standard);
+    height: 100%;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    padding-right: 5%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bolder;
+    font-size: 24px;
+}
+.our-testimony  .slick-track{
+    display: flex;
+    height: fit-content;
+}
+
+.our-testimony .slick-initialized .slick-slide {
+    margin: 12px;
+}
+.card-testimony p{
+    padding: 24px;
+}

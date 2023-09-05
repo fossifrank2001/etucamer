@@ -1,0 +1,32 @@
+.about-us{
+    margin: 0 auto;
+    width: 85%;
+    height: fit-content;
+}
+.about-us h5{
+    font-size: 32px;
+    font-weight: bolder;
+    /*background-color: var(--primary);*/
+    padding: 18px 0 18px 5%;
+    width: 50%;
+    transform: translateY(50%);
+    overflow: hidden;
+}
+.about-us h5::before {
+    content: "";
+    z-index: -1; /* Move the pseudo-element behind the parent content */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--primary);
+    transform: skewX(30deg); /* Inclinaison du côté droit de 30 degrés (négatif pour l'inclinaison vers la droite) */
+    transform-origin: bottom right; /* Point d'origine de la transformation */
+}
+.about-us .container{
+    height: fit-content;
+    font-weight: bolder;
+    font-size: 24px;
+    padding: 5%;
+}

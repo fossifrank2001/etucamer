@@ -1,0 +1,105 @@
+.baniere{
+    width: 90%;
+    margin: 0 auto;
+    /*z-index: 50;*/
+}
+
+.baniere .box-1{
+    background-color: var(--secondary);
+}
+
+/******************************************* START CAROUSEL****************************************************/
+.baniere .container, .box-2, .baniere  .slick-list, .baniere  .slick-slider .slick-track{
+    height: 450px;
+}
+.box-2 .slick-slider .slick-arrow{
+    display: none!important;
+}
+.box-2 .slick-dots{
+    bottom: 50px!important;
+    right: 25%!important;
+}
+.box-2 .slick-dots li button::before {
+    opacity: .5;
+    color: white;
+    font-size: 16px;
+}
+.box-2 .slick-dots li.slick-active button::before {
+    opacity: 1;
+    color: white;
+}
+/*******************************************END CAROUSEL****************************************************/
+.wrapper-carousel-text{
+    background: linear-gradient(to right, rgba(146, 146, 146, 1), rgba(146, 146, 146, .75), rgba(146, 146, 146, .5), rgba(251, 162, 3, .40), rgba(251, 162, 3, .20));
+}
+.remark{
+    transform: translate(32px);
+    padding: 32px;
+    font-size: 24px;
+}
+.container-box{
+    transform: translate(64px, 24px);
+}
+button.register-btn{
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: var(--primary);
+    color: var(--standard);
+}
+.high-text{
+    font-weight: bolder;
+    line-height: 1.2;
+}
+.low-text{
+    margin: 24px 0;
+}
+.promoteur-infos .card{
+    width: 65%;
+    margin: 0 auto;
+    transform: translateY(-32px);
+}
+.promoteur-infos .card-header{
+    border-bottom: 2px solid lightgray;
+}
+
+.card-header span{
+    font-size: 32px;
+    font-weight: bolder;
+    padding: 18px 0;
+}
+.wrapper-image-promoteur {
+    background: url("../../images/news-5.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.wrapper-image-promoteur div{
+    background-color: rgba(146,146, 146, .65);
+    height: 100%;
+}
+.wrapper-image-promoteur p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    width: 95%;
+    font-size: 18px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.wrapper-image-promoteur p::before{
+    top: 12%;
+    left: 0;
+    content: '<<';
+}
+.wrapper-image-promoteur p::after, .wrapper-image-promoteur p::before{
+    position: absolute;
+    color: var(--primary);
+    /*font-size: 24px;*/
+    font-weight: bolder;
+}
+.wrapper-image-promoteur p::after{
+    bottom: 21.5%;
+    left: 30%;
+    content: '>>';
+}
