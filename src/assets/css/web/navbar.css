@@ -112,7 +112,7 @@ div.second_bloc_nav {
     text-decoration: underline;
     color: #0080ff;
 }
-.links-burger button {
+.links-burger {
     display: none;
 }
 .over-lap{
@@ -139,6 +139,9 @@ div.second_bloc_nav {
     }
     .links{
         display: none!important;
+    }
+    .links-burger{
+        display: block;
     }
     .links-burger button{
         display: flex;
@@ -168,5 +171,11 @@ div.second_bloc_nav {
     }
     .flex-one .popper-contact, .dial-pad{
         display: block!important;
+    }
+    /*li div.MuiListItemButton-root{*/
+    /*    text-align: center!important;*/
+    /*}*/
+    .sub-flex-one, .sub-flex-two{
+        padding: 8px!important;
     }
 }
