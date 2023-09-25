@@ -10,7 +10,7 @@ function App() {
   return (
       <BrowserRouter>
           <Routes>
-              <Route path='/web' element={<WebLayout />}>
+              <Route path='/' element={<WebLayout />}>
                   <Route index element={<Home/>} />
               </Route>
               <Route path='/auth'>
