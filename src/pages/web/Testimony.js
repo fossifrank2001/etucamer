@@ -93,6 +93,34 @@ export default function Testimony() {
             activeSlide.style.transform = 'scale(1.05)'; // Appliquer l'effet d'échelle au slide actif
         });
     };
+    const swiperParams = {
+        onSwiper: handleSwiper,
+        modules: [Autoplay, Navigation, Pagination],
+        spaceBetween: 30, // Espace entre les slides
+        centeredSlides: true, // Slide actif centré
+        slidesPerGroup: 1, // Défiler un slide à la fois
+        loop: true, // Activez la boucle infinie
+        navigation: false,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            dynamicBullets: true,
+        },
+        // Utilisez deux breakpoints distincts pour les écrans mobiles et plus larges
+        breakpoints: {
+            // Lorsque la largeur d'écran est inférieure à 768 pixels (écran mobile)
+            767: {
+                slidesPerView: 1, // Affichez 1 diapositive sur les écrans mobiles
+            },
+            // Lorsque la largeur d'écran est supérieure ou égale à 768 pixels (écran plus large)
+            768: {
+                slidesPerView: 3, // Affichez 3 diapositives sur les écrans plus larges
+            },
+        },
+    };
+
     return (
         <Box component='section' id='temoignages' position='relative' className='our-testimony'>
             <Typography variant='h5'>Témoignages</Typography>
@@ -101,22 +129,7 @@ export default function Testimony() {
                 <Box className='Box-slider' >
                     <Box  className='wrapper-testimony'>
                         <Swiper
-                            onSwiper={handleSwiper}
-                            modules={[Autoplay, Navigation, Pagination]}
-                            className="mySwiper"
-                            spaceBetween={30} // Espace entre les slides
-                            slidesPerView={3} // Nombre de slides par vue
-                            centeredSlides={true} // Slide actif centré
-                            slidesPerGroup={1} // Défiler un slide à la fois
-                            loop={true} // Activez la boucle infinie
-                            navigation={false}
-                            autoplay={{ // Configurez l'autoplay
-                                delay: 3000, // Délai entre les diapositives en millisecondes (par exemple, 3 secondes)
-                                disableOnInteraction: false, // L'autoplay continue même après l'interaction de l'utilisateur
-                            }}
-                            pagination={{
-                                dynamicBullets: true,
-                            }}
+                            {...swiperParams}
                         >
                             {items}
                         </Swiper>

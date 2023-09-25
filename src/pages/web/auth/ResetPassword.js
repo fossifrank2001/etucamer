@@ -4,11 +4,13 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import MailIcon from '@mui/icons-material/Mail';
 import logo from '../../../assets/images/logo1.png'
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {LoadingButton} from "@mui/lab";
 import '../../../assets/css/web/resetPassword.css'
 import {inputProps} from "../../../components/utils/function";
+import {HOME_URL} from "../../../components/utils/utilsFunction";
 export default function ResetPassword() {
+    const navigate = useNavigate()
     //Handle Popper functionnalities
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +40,7 @@ export default function ResetPassword() {
         <Box sx={{width:"100vw", height:"100vh"}} display="flex" justifyContent="center" alignItems="center">
             <Box className='reset-password'>
                 <Box sx={{padding:"16px 24px", width:"100%"}}>
-                    <Box width="100%" display='flex' justifyContent="center">
+                    <Box width="100%" display='flex' justifyContent="center" onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}>
                         <img style={{height:"100px", objectFit:"cover", objectPosition:"center"}} src={logo} alt='logo'/>
                     </Box>
                     <Paper elevation={3} sx={{padding:"16px 24px", width:"100%", borderRadius:"15px", margin:'24PX'}}>

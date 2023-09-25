@@ -79,14 +79,26 @@
 }
 /* Utilisez une media query pour les appareils mobiles */
 @media screen and (max-width: 480px) {
+    .swiper.swiper-initialized{
+        width: 100%;
+    }
     .our-testimony .swiper-slide{
         font-size: 14px!important;
         width: 100%!important;
     }
     .our-testimony .custom-navigation{
         z-index: 2;
+        display: none!important;
     }
     .our-testimony .wrapper-testimony{
         margin-top: 24px!important;
     }
+    .centered-slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
 }

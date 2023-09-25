@@ -39,7 +39,7 @@
     .our-services .grid-wrapper{
         grid-template-columns: repeat(1, 1fr);
         gap: 50px;
-        padding: 24px;
+        padding: 24px 0;
     }
     .big-title .icon{
         font-size: 40px;

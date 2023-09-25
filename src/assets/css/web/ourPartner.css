@@ -35,8 +35,14 @@
 /* Utilisez une media query pour les appareils mobiles */
 @media screen and (max-width: 480px) {
     .our-partner .container p{
-        line-height: 40px;
+        line-height: 24px;
         font-size: 14px!important;
         margin-top: 18px;
+    }
+    .our-partner  .slick-list, .slick-track, .our-partner  .slick-slide img{
+        height: 200px;
+    }
+    .slick-slide img{
+        object-fit: initial!important;
     }
 }

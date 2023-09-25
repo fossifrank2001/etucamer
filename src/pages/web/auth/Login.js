@@ -6,10 +6,11 @@ import {Field, Form, Formik} from "formik";
 import {inputProps, isoToEmoji} from "../../../components/utils/function";
 import * as Yup from "yup";
 import InputCheckBox from "../../../components/utils/InputCheckBox";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../components/utils/utilsFunction";
 import {ArrowBack} from "@mui/icons-material";
 export default function Login() {
+    const navigate = useNavigate()
     useEffect(()=>{
         document.title = 'EDUCAMER | Login'
     }, [])
@@ -40,18 +41,18 @@ export default function Login() {
             <Grid className='wrapper-login'>
                 <Grid className='grid' container>
                     <Grid className='first_section' item xs={12} md={6}>
-                        <Box><img src={logo} alt='logo' /></Box>
+                        <Box onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}><img src={logo} alt='logo' /></Box>
                         <Typography variant='body1' mt={1}>🎓 Bienvenue sur l'application <strong>ETUCAMER</strong> !</Typography>
                         <Typography variant='body1' mt={3} style={{fontWeight:'lighter'}}>
                             Bienvenue dans notre communauté éducative. Que vous soyez étudiant, enseignant ou membre du personnel, notre application vous simplifie votre expérience universitaire.
                         </Typography>
                         <Typography variant='body1' mt={1}><strong>Pourquoi pas vous connecter dès maintenant ? 📚</strong></Typography>
                     </Grid>
-                    <Grid className='second_section' item xs={12} md={4}>
-                        <Typography variant='h5' my={3}>Login</Typography>
-                        <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', color:"var(--primary)"}}>
+                    <Grid className='second_section' item xs={12} md={5}>
+                        <Typography variant='h5' my={3}>Inscription</Typography>
+                        <Box className='login-redirect' sx={{display:'flex', alignItems:'center', justifyContent:'center', color:"var(--primary)"}}>
                             <ArrowBack />
-                            <Link to={HOME_URL} style={{textAlign:'center!important', marginLeft:'10px', color:"var(--primary)"}}>HomePage</Link>
+                            <Link  to={HOME_URL} style={{textAlign:'center!important', marginLeft:'10px', color:"var(--primary)"}}>Retournez a la page d'acceuil</Link>
                         </Box>
                         <Formik
                             initialValues={initialValues}

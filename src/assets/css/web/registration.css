@@ -13,6 +13,7 @@
     font-family: 'Rammetto One', cursive!important;
     font-size: 32px;
     text-align: center;
+    margin-top: 32px;
 }
 
 .registration .handle-salutation{
@@ -166,6 +167,10 @@
 .button:nth-child(3){
     color: var(--success);
 }
+
+.registration .MuiInputAdornment-root span{
+    margin-top: 0;
+}
 /* Utilisez une media query pour les appareils mobiles */
 @media screen and (max-width: 480px) {
     .MuiAlert-message{
@@ -188,5 +193,12 @@
     }
     .MuiPaper-elevation{
         width: 100%!important;
+    }
+    .wrapper-list-institute button:not(.MuiPaper-root.MuiPaper-elevation button){
+        width: 100%;
+    }
+    .registration .MuiPaper-root.MuiPaper-elevation{
+        padding: 24px 0!important;
+        box-shadow: none;
     }
 }

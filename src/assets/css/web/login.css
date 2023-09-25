@@ -2,6 +2,7 @@
     background: url("../../images/register-img.jpg");
     background-position: center;
     background-size: cover;
+    position: relative;
 }
 .login .wrapper-login{
     min-height: 100vh;
@@ -20,7 +21,7 @@
 }
 .login .first_section{
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 .login h5{
     font-family: 'Rammetto One', cursive!important;
@@ -46,7 +47,7 @@
 }
 
 .login .remember_me{
-    padding-top: 0!important;
+    padding-top: 18px!important;
 }
 .login .css-k4qjio-MuiFormHelperText-root.Mui-error{
     font-size: 12px!important;
@@ -64,9 +65,19 @@
     padding: 24px;
     background-color: var(--standard);
 }
+
+.login .login-redirect{
+    display: none;
+}
 @media screen and (max-width: 480px) {
+    .login .grid{
+        width: 95%!important;
+    }
     .login .wrapper-login{
         background-color: var(--standard);
+    }
+    .login .second_section{
+        box-shadow: none;
     }
     .first_section{
         display: none!important;
@@ -76,5 +87,10 @@
     }
     .login .handle-login{
         font-size: 12px !important;
+    }
+    .login .login-redirect{
+        display: flex;
+        position: absolute;
+        top: 24px;
     }
 }
