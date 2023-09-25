@@ -41,7 +41,7 @@ export default function Login() {
             <Grid className='wrapper-login'>
                 <Grid className='grid' container>
                     <Grid className='first_section' item xs={12} md={6}>
-                        <Box onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}><img src={logo} alt='logo' /></Box>
+                        <Box onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}} className='login-logo'><img src={logo} alt='logo' /></Box>
                         <Typography variant='body1' mt={1}>🎓 Bienvenue sur l'application <strong>ETUCAMER</strong> !</Typography>
                         <Typography variant='body1' mt={3} style={{fontWeight:'lighter'}}>
                             Bienvenue dans notre communauté éducative. Que vous soyez étudiant, enseignant ou membre du personnel, notre application vous simplifie votre expérience universitaire.

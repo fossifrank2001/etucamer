@@ -194,11 +194,20 @@
     .MuiPaper-elevation{
         width: 100%!important;
     }
-    .wrapper-list-institute button:not(.MuiPaper-root.MuiPaper-elevation button){
+    .wrapper-list-institute button:not(.MuiPaper-root.MuiPaper-elevation form button){
         width: 100%;
     }
-    .registration .MuiPaper-root.MuiPaper-elevation{
+    .registration .MuiPaper-root.MuiPaper-elevation:not(.MuiPaper-root.MuiPaper-elevation[role="alert"]){
         padding: 24px 0!important;
         box-shadow: none;
+    }
+    .registration .MuiStepLabel-label{
+        text-transform: lowercase;
+    }
+    .registration .btn-new-student button{
+        margin: 0!important;
+    }
+    .btn-new-student hr{
+        display: none;
     }
 }
