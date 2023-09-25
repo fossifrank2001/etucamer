@@ -21,7 +21,12 @@
     "react-spinners": "^0.13.8",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "swiper": "^10.2.0",
+    "yup": "^1.2.0",
+    "formik": "^2.4.2",
+    "@mui/lab": "^5.0.0-alpha.137",
+    "material-ui-popup-state": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

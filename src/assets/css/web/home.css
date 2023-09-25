@@ -1,16 +1,74 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Comfortaa', cursive!important;
+}
+body p{
+    font-size: 18px!important;
+}
 .baniere{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    /*z-index: 50;*/
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.wrapper-about-us, .wrapper-testimony,.wrapper-services{
+    margin: 0 auto;
+    width: 85%;
+}
+.wrapper-patner{
+    margin: 0 auto;
+    width: 95%;
+    box-shadow: inset -10px 0px 5px 0px #f6f6f6;
+}
+.our-partner, .our-services, .our-testimony, .about-us, .our-contact{
+    width: 100%;
+    height: fit-content;
 }
 
+h5.high-text, h5.high-text span, .our-partner h5, .our-services h5, .our-testimony h5, .about-us h5, .our-contact h5{
+    font-family: 'Rammetto One', cursive!important;
+}
+.our-partner h5, .our-services h5, .our-testimony h5, .about-us h5, .our-contact h5{
+    font-size: 32px;
+    font-weight: bolder;
+    padding: 18px 0 18px;
+    width: 50%;
+    transform: translateY(60%);
+    overflow: hidden;
+    text-align: center;
+    clip-path: polygon(0 1%, 94% 0, 100% 100%, 0% 100%);
+    background-color: var(--primary);
+    z-index: 10;
+    position: relative;
+}
+
+/* Utilisez une media query pour les appareils mobiles */
+@media screen and (max-width: 480px) {
+    .our-partner h5, .our-services h5, .our-testimony h5, .about-us h5, .our-contact h5{
+        clip-path: none!important;
+        width: 100%!important;
+        font-size: 16px!important;
+    }
+}
+.our-services .container, .our-partner .container, .our-testimony .container{
+    height: fit-content;
+    padding-top: 3.25%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
 .baniere .box-1{
     background-color: var(--secondary);
 }
 
 /******************************************* START CAROUSEL****************************************************/
 .baniere .container, .box-2, .baniere  .slick-list, .baniere  .slick-slider .slick-track{
-    height: 450px;
+    height: 100%;
+}
+.box-2 .slick-slider.slick-initialized{
+    height: 100%!important;
 }
 .box-2 .slick-slider .slick-arrow{
     display: none!important;
@@ -30,33 +88,45 @@
 }
 /*******************************************END CAROUSEL****************************************************/
 .wrapper-carousel-text{
-    background: linear-gradient(to right, rgba(146, 146, 146, 1), rgba(146, 146, 146, .75), rgba(146, 146, 146, .5), rgba(251, 162, 3, .40), rgba(251, 162, 3, .20));
+    background: linear-gradient(90deg, rgba(98,98,98,1) 16%, rgba(134,132,132,1) 54%, rgba(255,163,0,0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .remark{
-    transform: translate(32px);
-    padding: 32px;
+    transform: translate(32px, -32PX);
+    padding: 0 32px ;
     font-size: 24px;
 }
 .container-box{
     transform: translate(64px, 24px);
 }
 button.register-btn{
-    padding: 8px 16px;
+    padding: 8px 32px;
     border-radius: 20px;
     background-color: var(--primary);
     color: var(--standard);
+    transition: all .5s ease;
 }
-.high-text{
+button.register-btn:hover{
+    transform: scale(.95);
+    background-color: var(--primary);
+    color: var(--standard);
+}
+h5.high-text{
     font-weight: bolder;
-    line-height: 1.2;
+    line-height: 1.5;
+    font-size: 32px;
 }
 .low-text{
-    margin: 24px 0;
+    margin: 8px 0 32px 0;
+    line-height: 1.75;
 }
 .promoteur-infos .card{
     width: 65%;
     margin: 0 auto;
     transform: translateY(-32px);
+    border-radius: 15px;
 }
 .promoteur-infos .card-header{
     border-bottom: 2px solid lightgray;
@@ -81,7 +151,7 @@ button.register-btn{
     justify-content: center;
     align-items: center;
     font-weight: bolder;
-    width: 95%;
+    width: 90%;
     font-size: 18px;
     height: 100%;
     margin: 0 auto;
@@ -90,16 +160,93 @@ button.register-btn{
 .wrapper-image-promoteur p::before{
     top: 12%;
     left: 0;
-    content: '<<';
+    content: '«';
 }
 .wrapper-image-promoteur p::after, .wrapper-image-promoteur p::before{
     position: absolute;
     color: var(--primary);
-    /*font-size: 24px;*/
     font-weight: bolder;
 }
 .wrapper-image-promoteur p::after{
-    bottom: 21.5%;
-    left: 30%;
-    content: '>>';
+    bottom: 12%;
+    left: 88%;
+    content: '»';
+}
+
+
+/**********************************************************************************************************************
+* TYPERTEXT
+***********************************************************************************************************************/
+
+.high-text{
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid transparent;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 0;
+    animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+/* Utilisez une media query pour les appareils mobiles */
+@media screen and (max-width: 480px) {
+    .wrapper-image-promoteur p{
+        font-size: 16px !important;
+        padding: 12px 24PX!important;
+    }
+    .promoteur .css-1w1vwsi{
+        font-size: 16px!important;
+        margin-top: 16px!important;
+    }
+    .card-header span {
+        font-size: 20px!important;
+    }
+    .promoteur-infos {
+        width: 90%!important;
+        margin: 0 auto!important;
+    }
+    .wrapper-carousel-text{
+        background: linear-gradient(90deg, rgba(98,98,98, .9) 16%, rgba(134,132,132, .9) 54%, rgba(255,163,0,0) 100%);
+    }
+    .remark,.low-text{
+        font-size: 14px!important;
+        transform: translate(0);
+        text-align: left!important;
+    }
+    h5.high-text{
+        font-size: 24px!important;
+    }
+    .container-box{
+        text-align: left!important;
+        transform: translate(0)!important;
+        margin: 24px 16px 0 32px!important;
+    }
+    .baniere .box-1{
+        background-image: url("../../images/banner1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-color: inherit!important;
+    }
+    .box-2{
+        display: none!important;
+    }
 }

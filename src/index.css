@@ -3,6 +3,8 @@
   --secondary: #929292;
   --standard: #fefefe;
   --dark:#000;
+  --danger: #9d1010;
+  --success: #059605;
 }
 
 body {

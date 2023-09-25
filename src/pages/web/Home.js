@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box, Button, Card, CardContent, CardHeader, Grid, Typography} from "@mui/material";
 import  '../../assets/css/web/home.css'
-import img1 from '../../assets/images/koki.jpeg'
-import img2 from '../../assets/images/fufu eru.jpeg'
+import img1 from '../../assets/images/banner1.jpg'
+import img2 from '../../assets/images/banner2.jpg'
 import promoteur from '../../assets/images/promoteur.png'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -11,8 +11,52 @@ import AboutUs from "./AboutUs";
 import OurContact from "./OurContact";
 import OurPartner from "./OurPartner";
 import Testimony from "./Testimony";
+import {useNavigate} from "react-router-dom";
+import {REGISTER_URL} from "../../components/utils/utilsFunction";
+
+const texts = [
+    "Tous les services de ton université sur EDUCAMER pour une vie académique plus facile.",
+    "Trouve tout ce dont tu as besoin pour réussir tes études sur EDUCAMER.",
+    "Simplifie ta vie académique avec tous les services regroupés sur EDUCAMER.",
+    "EDUCAMER, ta plateforme universitaire tout-en-un pour une expérience étudiante optimale.",
+    "Accède à tous les outils et ressources dont tu as besoin sur EDUCAMER.",
+    "Fais de tes études une expérience simplifiée avec EDUCAMER.",
+    "EDUCAMER, ta clé pour une vie académique plus fluide.",
+    "Découvre un monde d'opportunités académiques sur EDUCAMER.",
+];
 
 export default function Home() {
+    const navigate = useNavigate()
+    const [currentText, setCurrentText] = useState('');
+    const [textIndex, setTextIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    useEffect(() => {
+        const delay = isDeleting ? 75 : 100; // Adjust the typing and deleting speed here
+
+        const text = texts[textIndex];
+        const textLength = currentText.length;
+
+        if (!isDeleting && textLength === text.length) {
+            // Start deleting
+            setIsDeleting(true);
+        } else if (isDeleting && textLength === 0) {
+            // Move to the next text
+            setIsDeleting(false);
+            setTextIndex((textIndex + 1) % texts.length);
+        }
+
+        const timer = setTimeout(() => {
+            setCurrentText((prevText) => {
+                return isDeleting
+                    ? prevText.slice(0, -1)
+                    : text.slice(0, prevText.length + 1);
+            });
+        }, delay);
+
+        return () => clearTimeout(timer);
+    }, [currentText, isDeleting, textIndex]);
+
     useEffect(() => {
         document.title = 'EDUCAMER | Home'
     }, []);
@@ -29,15 +73,14 @@ export default function Home() {
         autoplaySpeed: 3000,
     };
     const handleClick = ()=>{
-        console.log('registration');
+        navigate(REGISTER_URL)
     }
     return (
         <Box component='main'>
             <Box component='section' position='relative' className='baniere'>
-                <Grid container className='container' width='100%'>
-                    <Grid item md={4} className='box-1'></Grid>
-                    <Grid item md={7} className='box-2'>
-                        {/*<img src={img1} alt='car0usel-image' style={{objectFit:"cover", objectPosition:'center', width:'100%', height:'100%'}}/>*/}
+                <Grid container className='container'>
+                    <Grid item xs={12} md={4} className='box-1'></Grid>
+                    <Grid item xs={0} md={8} className='box-2'>
                         <Slider  {...settings}>
                             <div >
                                 <img src={img1} alt='car0usel-image' style={{objectFit:"cover", objectPosition:'center', width:'100%', height:'100%'}}/>
@@ -49,17 +92,17 @@ export default function Home() {
                     </Grid>
                 </Grid>
 
-                 <Grid container>
-                     <Grid display='flex' flexDirection='column' item xs={12} md={6} position='absolute' top='0' left='0' width='100%' height='100%' className='wrapper-carousel-text'>
+                 <Grid container className='wrapper'>
+                     <Grid display='flex' flexDirection='column' item xs={12} md={8} position='absolute' top='0' left='0' width='100%' height='100%' className='wrapper-carousel-text'>
                          <Typography className='remark' color='var(--standard)' composant='span'>La platforme par excellence de l'etudiant Camerounais !</Typography>
-                         <Grid container>
-                             <Grid item xs={12} md={8}>
+                         <Grid container className=''>
+                             <Grid className='' item xs={12} md={10}>
                                  <Box className='container-box'>
                                      <Typography className='high-text' color='var(--standard)' variant='h5'>
-                                        Tout les services de ton universite sur EDUCAMER pour une vie academique plus facilitee.
+                                         {currentText}
                                     </Typography>
                                     <Box className='low-text' color='var(--standard)'  component='div'>
-                                        Nous digitalisons les services des universite d' Etat et privees au Cameroun afin d'ameliorer la vie des etudiants
+                                        Nous digitalisons les services des universite d' Etat et privees au Cameroun afin d'ameliorer la vie des etudiants.
                                     </Box>
                                     <Button onClick={handleClick} sx={{textTransform:"initial"}} className='register-btn'>S'incrire</Button>
                                 </Box>
@@ -79,14 +122,13 @@ export default function Home() {
                         <Grid  container>
                             <Grid xs={12} md={5} item>
                                 <Box style={{width:"100%", height:'89.25%'}}><img src={promoteur} alt='promteur-img' style={{width:"100%", height:'100%', objectFit:"cover", objectPosition:'center'}} /></Box>
-                                <Box sx={{textAlign:"center", fontWeight:"bolder", lineHeight:"1.2em", fontSize:'24px'}}>Samuel DIMOU</Box>
+                                <Box className='promoteur' sx={{textAlign:"center", fontWeight:"bolder", lineHeight:"1.2em", fontSize:'24px'}}>Samuel DIMOU</Box>
                             </Grid>
                             <Grid xs={12} md={7} item className='wrapper-image-promoteur'>
                                 <Box>
                                     <Typography variant="body2" color="var(--standard)">
                                         Bienvenue au etudiants du cameroun a EDUCAMER, votre platform numerique qui simplifie la vie de etudiants! Nous sommes honore de vous offrir des services qui comblent vos besoins
-                                        tout au long de votre parcour academique.Nous sommes convaicus qu nos services ameliorent votre esperiance universitaire et nous sommes impatient de vous accompagner sur
-                                        ce voyage vers  un avenir lumineux.
+                                        tout au long de votre parcour.
                                     </Typography>
                                 </Box>
                             </Grid>

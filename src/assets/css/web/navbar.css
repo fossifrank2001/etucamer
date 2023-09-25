@@ -1,3 +1,9 @@
+navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
 /* STATIC ELEMENT STYLE*/
 div.first_bloc_nav .MuiSelect-icon.MuiSvgIcon-root {
     color: var(--standard);
@@ -9,42 +15,42 @@ div.first_bloc_nav fieldset.MuiOutlinedInput-notchedOutline{
 /*********************************** FIRST NAVBAR *****************************************88*/
 /* Styles for the parent container */
 div.first_bloc_nav {
-    width: 90%;
-    display: flex;
-    margin: 0 auto;
     height: 50px;
-    /*background-color: var(--secondary);*/
+    background-color: var(--secondary);
 }
-
+div.first_bloc_nav .wrapper-first-nav{
+    display: flex!important;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+div.second_bloc_nav .wrapper-second-nav{
+    width: 85%;
+    margin: 0 auto;
+    display: flex!important;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: var(--standard);
+}
 /* Shared styles for child elements */
 .flex-one,
 .flex-two {
     width: 50%;
     color: var(--standard);
-    padding: 0 5%;
 }
 
 /* Styles for the first child (.flex-one) */
 .first_bloc_nav .flex-one {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     position: relative;
     overflow: hidden;
-}
-
-/* Skewed background effect on .flex-one */
-.first_bloc_nav .flex-one::before {
-    content: "";
-    z-index: -1; /* Move the pseudo-element behind the parent content */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
     background-color: var(--primary);
-    transform: skewX(-30deg); /* Inclinaison du côté droit de 30 degrés (négatif pour l'inclinaison vers la droite) */
-    transform-origin: top right; /* Point d'origine de la transformation */
+    height: 100%;
+    clip-path: polygon(0 1%, 100% 0%, 93% 100%, 0% 100%);
+    justify-content: space-between;
+    padding: 0 10%;
 }
 
 /* Styles for the second child (.flex-two) */
@@ -55,22 +61,8 @@ div.first_bloc_nav {
     background-color: var(--secondary);
     position: relative;
     overflow: hidden;
+    padding-right: 7.5%;
 }
-
-/* Skewed background effect on .flex-one */
-.first_bloc_nav .flex-two::before {
-    content: "";
-    z-index: -1; /* Move the pseudo-element behind the parent content */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    background-color: var(--primary);
-    transform: skewX(-30deg); /* Inclinaison du côté droit de 30 degrés (négatif pour l'inclinaison vers la droite) */
-    transform-origin: bottom right; /* Point d'origine de la transformation */
-}
-
 /* Shared styles for sub-elements within .flex-one and .flex-two */
 .flex-one .sub-flex-one,
 .flex-one .sub-flex-two,
@@ -84,41 +76,97 @@ div.first_bloc_nav {
 /*********************************** SECOND NAVBAR *****************************************88*/
 /* Styles for the parent container */
 div.second_bloc_nav {
-    width: 85%;
-    display: flex;
-    margin: 0 auto;
+    width: 100%;
     height: 75px;
-    justify-content: space-between;
-    align-items: center;
-    /*position: sticky;*/
-    top: 0;
-    left: auto;
-    right: auto;
-    /*z-index: 100;*/
+    background-color: white;
+    box-shadow: 0 3px 5px lightgray;
 }
-
 .second_bloc_nav .links{
     display: flex;
     align-items: center;
     font-weight: bolder;
 }
-
-.links .link a{
-    padding: 16px;
-    cursor: pointer;
-    font-size: 18px;
-    opacity: .25;
-    text-decoration: none;
-    color: var(--dark);
-    transition: all .75s ease-out;
-}
-.links .link.active a, .links .link:hover a{
-    opacity: .75;
+.links .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+    color: var(--primary);
 }
 .links .login-btn{
-    padding: 8px;
+    padding: 8px 24px;
     border-radius: 20px;
     background-color: var(--primary);
     color: var(--standard);
+    transition: all .5s ease-out;
 }
-
+.links .login-btn:hover{
+    background-color: var(--standard);
+    color:  var(--primary);
+    border: 1px solid var(--primary);
+}
+.logo{
+    height: 100%;
+}
+.contacts, .contacts .contacts-icon{
+    cursor: pointer;
+    transition: all .5s ease;
+}
+.contacts:hover, .contacts:hover .contacts-icon{
+    text-decoration: underline;
+    color: #0080ff;
+}
+.links-burger button {
+    display: none;
+}
+.over-lap{
+    min-height: 100vh;
+    position: relative;
+    width: 100%!important;
+}
+.over-lap button.btn-close{
+    position: absolute;
+    right: 10px!important;
+    top: 10px!important;
+    z-index: 2!important;
+    margin: 0!important;
+}
+.flex-one .popper-contact, .dial-pad{
+    display: none!important;
+}
+@media screen and (max-width: 480px) {
+    .logo{
+        height: 35px!important;
+    }
+    .sub-flex_{
+        display: none!important;
+    }
+    .links{
+        display: none!important;
+    }
+    .links-burger button{
+        display: flex;
+        font-size: 40px;
+        opacity: .50;
+        cursor: pointer;
+    }
+    .links-burger button:hover{
+        opacity: 1;
+    }
+    .over-lap .login-btn{
+        padding: 8px 24px;
+        border-radius: 20px;
+        background-color: var(--primary);
+        color: var(--standard);
+        transition: all .5s ease-out;
+        margin: 24px 0 0 16px;
+    }
+    .over-lap .login-btn:hover{
+        background-color: var(--standard);
+        color:  var(--primary);
+        border: 1px solid var(--primary);
+    }
+    .over-lap a{
+        color: var(--dark);
+        text-decoration: none;
+    }
+    .flex-one .popper-contact, .dial-pad{
+        display: block!important;
+    }
+}

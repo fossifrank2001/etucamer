@@ -1,51 +1,42 @@
-.our-partner{
-    margin: 0 auto;
-    width: 85%;
-    height: fit-content;
-}
-.our-partner h5{
-    font-size: 32px;
-    font-weight: bolder;
-    /*background-color: var(--primary);*/
-    padding: 18px 0 18px 5%;
-    width: 50%;
-    transform: translateY(50%);
-    overflow: hidden;
-}
-.our-partner h5::before {
-    content: "";
-    z-index: -1; /* Move the pseudo-element behind the parent content */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    background-color: var(--primary);
-    transform: skewX(30deg); /* Inclinaison du côté droit de 30 degrés (négatif pour l'inclinaison vers la droite) */
-    transform-origin: bottom right; /* Point d'origine de la transformation */
-}
-.our-partner .container{
-    height: fit-content;
-    padding-top: 3.25%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-}
 .our-partner .container p{
     text-align: center;
     font-weight: bolder;
-    line-height: 100px;
-    font-size: 18px;
+    line-height: 75px;
+    /*font-size: 18px;*/
 }
 .Box-slider{
     background-color: var(--standard);
     color: var(--dark);
+    padding-top: 0!important;
 }
 
-.our-partner  .slick-list, .slick-track{
-    height: 300px;
+.our-partner .slick-list{
+    width: 100%;
+    margin: 0 auto;
 }
-
+.our-partner  .slick-list, .slick-track, .our-partner  .slick-slide img{
+    height: 275px;
+}
+.our-partner  .slick-slide, .our-partner  .slick-slide img{
+    width: 250px!important;
+}
 .our-partner  .slick-slide div, .our-partner  .slick-slide img{
     height: 100%;
+}
+.our-partner  .slick-slide img{
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+.our-partner  .slick-slide img:hover{
+    transform: scale(.95);
+}
+/* Utilisez une media query pour les appareils mobiles */
+@media screen and (max-width: 480px) {
+    .our-partner .container p{
+        line-height: 40px;
+        font-size: 14px!important;
+        margin-top: 18px;
+    }
 }

@@ -1,0 +1,80 @@
+.login{
+    background: url("../../images/register-img.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.login .wrapper-login{
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(90deg, rgba(255,252,252,1) 16%, rgba(255,255,255,1) 54%, rgba(255,163,0,0) 100%);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.login .grid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 85%;
+}
+.login .first_section{
+    display: flex;
+    align-items: center;
+}
+.login h5{
+    font-family: 'Rammetto One', cursive!important;
+    font-size: 32px;
+    text-align: center;
+}
+
+.login .MuiFormControl-root.MuiFormControl-fullWidth,
+.login .MuiFormControl-root.MuiTextField-root,
+.login button[type="submit"]{
+    height: 50px;
+}
+.login .MuiInputBase-root.MuiOutlinedInput-root{
+    height: 100%;
+}
+.login .MuiFormControl-root.MuiTextField-root{
+    width: 100%;
+}
+.login button[type="submit"]{
+    text-transform: initial!important;
+    color: var(--dark);
+    font-size: 18px;
+}
+
+.login .remember_me{
+    padding-top: 0!important;
+}
+.login .css-k4qjio-MuiFormHelperText-root.Mui-error{
+    font-size: 12px!important;
+}
+.login .handle-login{
+    text-align: center;
+    font-size: 16px!important;
+    margin:0;
+    width: 100%;
+}
+
+.login .second_section{
+    border-radius: 15px;
+    box-shadow: 0 0 10px lightgray;
+    padding: 24px;
+    background-color: var(--standard);
+}
+@media screen and (max-width: 480px) {
+    .login .wrapper-login{
+        background-color: var(--standard);
+    }
+    .first_section{
+        display: none!important;
+    }
+    .remember_me, .remember_me .MuiFormControlLabel-label{
+        font-size: 12px!important;
+    }
+    .login .handle-login{
+        font-size: 12px !important;
+    }
+}
