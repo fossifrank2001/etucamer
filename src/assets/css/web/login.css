@@ -104,4 +104,7 @@
     .login .login-logo-mobile{
         display: flex!important;
     }
+    .login .css-k4qjio-MuiFormHelperText-root.Mui-error {
+        font-size: 6px !important;
+    }
 }

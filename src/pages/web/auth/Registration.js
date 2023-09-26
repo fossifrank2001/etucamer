@@ -61,6 +61,8 @@ export default function Registration() {
         diplome:'',
         birth_day:null,
         birth_place:'',
+        password:'',
+        password_confirmation:'',
     }
     const [data, setData] = useState(initialValues)
     const validationOneSchema = Yup.object({

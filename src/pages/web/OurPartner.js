@@ -36,13 +36,13 @@ export default function OurPartner() {
                         <Typography variant='body1'>Decouvrez nos partenaires exclusifs.Ils nous ont fait confiance !</Typography>
 
                         <Slider {...settings}>
-                            <Box>
+                            <Box data-aos="fade-left">
                                 <img src={ud} alt="Image 1" />
                             </Box>
-                            <Box>
+                            <Box data-aos="fade-left">
                                 <img src={uy} alt="Image 2" />
                             </Box>
-                            <Box>
+                            <Box data-aos="fade-left">
                                 <img src={iuc} alt="Image 3" />
                             </Box>
                         </Slider>

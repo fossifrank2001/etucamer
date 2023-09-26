@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Box, Grid, Typography} from "@mui/material";
 import '../../../assets/css/web/footer.css'
 import {Article, Assignment, Book, EventRepeat, Help, LibraryBooks, Payment, Warning} from "@mui/icons-material";
-
+import AOS from "aos";
+import 'aos/dist/aos.css';
 export default function Footer() {
+    useEffect(() => {
+        AOS.init({
+            duration: 1000, // Specify the animation duration in milliseconds
+        });
+    }, []);
     return (
         <Box component='footer' id='nos-services' position='relative' className='our-services'>
             <Typography variant='h5'>Nos Services</Typography>
             <Box className='container' sx={{backgroundColor:"var(--secondary)", color:"var(--dark)"}}>
                 <Box  className='wrapper-services'>
                 <Box className='grid-wrapper' container  spacing={3}>
-                    <Box item className='item'>
+                    <Box data-aos="fade-right" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Article className='icon'/>
                             <Typography variant='h4'>Actualités</Typography>
@@ -21,7 +27,7 @@ export default function Footer() {
                             niveau et votre université en général.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-left" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Book className='icon'/>
                             <Typography variant='h4'>Résultats d'examen</Typography>
@@ -32,7 +38,7 @@ export default function Footer() {
                             ETUCAMER sans vous déplacer.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-right" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <EventRepeat className='icon'/>
                             <Typography variant='h4'>Programmes</Typography>
@@ -42,7 +48,7 @@ export default function Footer() {
                             Avec un rappel quotidien de ceux ci sur votre ecran en temps réel.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-left" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Warning className='icon'/>
                             <Typography variant='h4'>Avertissements</Typography>
@@ -51,7 +57,7 @@ export default function Footer() {
                             Soyez avisé en cas d'absence, ou manque d'un enseignant et gagner en temps, em argent et en energie.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-right" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <LibraryBooks className='icon'/>
                             <Typography variant='h4'>Support de cours</Typography>
@@ -63,7 +69,7 @@ export default function Footer() {
                             directement sur leur tableau de bord.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-left" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Help className='icon'/>
                             <Typography variant='h4'>Aide au requetes</Typography>
@@ -75,7 +81,7 @@ export default function Footer() {
                             pouvez personnaliser.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-right" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Assignment className='icon'/>
                             <Typography variant='h4'>Anciens sujets corrigés</Typography>
@@ -86,7 +92,7 @@ export default function Footer() {
                             matière en format image.
                         </Typography>
                     </Box>
-                    <Box item className='item'>
+                    <Box data-aos="fade-left" data-aos-duration="1000" item className='item'>
                         <Box className='big-title'>
                             <Payment className='icon'/>
                             <Typography variant='h4'>Paiement</Typography>

@@ -201,6 +201,9 @@
         grid-template-columns: repeat(2, minmax(0, 1fr))!important; /* Une seule colonne */
         justify-content: center;
     }
+    .wrapper-list-institute.last-slide{
+        padding: 16px 1px!important;
+    }
     .btn-new-student{
         flex-direction: column!important;
         padding: 0 24px;
@@ -223,5 +226,8 @@
     }
     .btn-new-student hr{
         display: none;
+    }
+    .registration .css-k4qjio-MuiFormHelperText-root.Mui-error{
+        font-size: 6px!important;
     }
 }
