@@ -27,6 +27,7 @@
     font-family: 'Rammetto One', cursive!important;
     font-size: 32px;
     text-align: center;
+    color: var(--primary);
 }
 
 .login .MuiFormControl-root.MuiFormControl-fullWidth,
@@ -72,6 +73,9 @@
 .login-logo, .login-logo img{
     width: 100%;
 }
+.login .login-logo-mobile{
+    display: none!important;
+}
 @media screen and (max-width: 480px) {
     .login .grid{
         width: 95%!important;
@@ -85,9 +89,10 @@
     .first_section{
         display: none!important;
     }
-    .remember_me, .remember_me .MuiFormControlLabel-label{
+    .remember_me{
         font-size: 12px!important;
     }
+    .remember_me div{text-align: right;}
     .login .handle-login{
         font-size: 12px !important;
     }
@@ -95,5 +100,8 @@
         display: flex;
         position: absolute;
         top: 24px;
+    }
+    .login .login-logo-mobile{
+        display: flex!important;
     }
 }

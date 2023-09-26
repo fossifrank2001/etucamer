@@ -23,7 +23,7 @@ import {
 import '../../../assets/css/web/registration.css'
 import InputSelect from "../../../components/utils/InputSelect";
 import {Alert, AlertTitle} from "@mui/lab";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -32,11 +32,13 @@ import 'swiper/css/pagination';
 import {Navigation } from 'swiper/modules';
 import {ChevronLeft, FileCopy, HelpCenter, Warning} from "@mui/icons-material";
 import InputCheckBox from "../../../components/utils/InputCheckBox";
-import {LOGIN_URL} from "../../../components/utils/utilsFunction";
+import {HOME_URL, LOGIN_URL} from "../../../components/utils/utilsFunction";
+import logo from "../../../assets/images/logo1.png";
 
 export default function Registration() {
+    const navigate = useNavigate()
     useEffect(()=>{
-        document.title = 'EDUCAMER | Registration'
+        document.title = 'ETUCAMER | Registration'
         setDataUniv(universites)
     }, [])
     const [isClick, setIsClick]= useState(false);
@@ -52,12 +54,13 @@ export default function Registration() {
         email: '',
         phone: '',
         cni_number:'',
-        selectedLevel:'',
         matricule:'',
         training:'',
         level:'',
         field:'',
         diplome:'',
+        birth_day:null,
+        birth_place:'',
     }
     const [data, setData] = useState(initialValues)
     const validationOneSchema = Yup.object({
@@ -78,6 +81,10 @@ export default function Registration() {
             .matches(/^[0-9\s]+$/, 'Numéro de CNI invalide')
             .max(8, 'Doit contenir 8 caractères')
             .required('Le numéro de la CNI est requis'),
+        birth_day: Yup.date()
+            .required('La date de naissance est requis'),
+        birth_place: Yup.string()
+            .required('Le lieu de naissance est requis'),
     });
     const validationTwoSchema = Yup.object({
         matricule: Yup.string().required('le matricule est requis'),
@@ -125,6 +132,7 @@ export default function Registration() {
     const handleNextStep = (newData, final = false)=>{
         setData(prev => ({...prev, ...newData}))
         if(final){
+            console.log(data)
             return
         }
         setCurrentStep(prev => prev + 1)
@@ -164,6 +172,9 @@ export default function Registration() {
         <Box className='registration'>
             <Grid container className='wrapper-registration'>
                 <Box width='100%'>
+                    <Box className='register-logo-mobile' width="100%" display='flex' justifyContent="center" onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}>
+                        <img style={{height:"100px", objectFit:"cover", objectPosition:"center"}} src={logo} alt='logo'/>
+                    </Box>
                     <Typography variant='h5'>Inscription</Typography>
                     <Typography variant='body1' className='handle-salutation' style={{margin:'16px 0 0 0'}}>
                         Déverrouillez un monde de possibilités ! <strong>Rejoignez-nous dès aujourd'hui !</strong>
@@ -243,12 +254,12 @@ export default function Registration() {
                                     }}>Ancien</Button>
                                 </Box>
                                 {isClick &&
-                                    <Grid item xs={12} md={8} margin='0 auto' style={{
+                                    <Grid item xs={12} md={11} margin='0 auto' style={{
                                         justifyContent: 'center',
                                         display: 'flex',
                                         alignItems: 'center',
                                     }}>
-                                        <Paper elevation={2} style={{padding: '24px', borderRadius: "15px"}}>
+                                        <Paper elevation={2} style={{padding: '24px', boxShadow:"none"}}>
                                         <Box>
                                             {isNew &&
                                                 <Stack
@@ -278,24 +289,30 @@ export default function Registration() {
                                                 <Stepper
                                                     activeStep={currentStep}
                                                     alternativeLabel
-                                                    sx={{pt: 3}}
-                                                    style={{margin: "0 auto"}}
+                                                    sx={{ pt: 3 }}
+                                                    style={{ margin: "0 auto" }}
                                                 >
                                                     <Step>
-                                                        <StepLabel>Informations personnelles</StepLabel>
+                                                        <StepLabel>
+                                                            {currentStep === 0 && "Infos personnelles"}
+                                                        </StepLabel>
                                                     </Step>
                                                     <Step>
-                                                        <StepLabel>Informations Universitaires</StepLabel>
+                                                        <StepLabel>
+                                                            {currentStep === 1 && "Infos Universitaires"}
+                                                        </StepLabel>
+                                                    </Step>
+                                                    <Step>
+                                                        <StepLabel>{currentStep === 2 && "Mot de passe"}</StepLabel>
                                                     </Step>
                                                 </Stepper>
-                                                <Alert severity="warning">
+
+
+                                                <Alert severity="warning" sx={{marginBottom:'18px'}}>
                                                     <AlertTitle>Attention</AlertTitle>
                                                     Evitez de faire plusieurs préinscriptions.
                                                     Si vous voulez modifier votre préinscription, veuillez vous connecter à votre espace privé.
                                                     <Link to={LOGIN_URL}>Cliquer ici pour vous connecter</Link>. En cas de difficulté, bien vouloir envoyer un mail au support technique (<Link to=''>{`support.etucamer@univ-${replaceSpacesWithUnderscores(selectedInstitute.libelle)}.org`}</Link>).
-                                                </Alert>
-                                                <Alert severity="error" style={{margin: "12px  0"}}>
-                                                    This is an error alert — <strong>check it out!</strong>
                                                 </Alert>
                                             </div>
                                             {steps[currentStep]}

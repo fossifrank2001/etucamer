@@ -22,6 +22,12 @@ import uba from  '../../assets/images/uba.jpg'
 import uma from  '../../assets/images/uma.jpg'
 import {Field, Form, Formik} from "formik";
 import React, {useState} from "react";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+
 /*
 * @param {String} code
 * @return String
@@ -273,7 +279,7 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
         onSubmit={handleSubmit}
     >
         {
-            (values) => {
+            ({values, setFieldValue}) => {
                 return <Form >
                     <Grid container spacing={2} className='first-step'>
                         <Grid item xs={12} md={6} mt={1}>
@@ -314,7 +320,35 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
                                 }}
                             </Field>
                         </Grid>
-                        <Grid item xs={12} md={6} mt={1}>
+                        <Grid item xs={12} md={4} mt={1}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date de naissance"
+                                    value={values.birth_day} // Bind value to form values
+                                    onChange={(date) => setFieldValue('birth_day', date)} // Update birth_day field in form values
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={12} md={4} mt={1}>
+                            <Field name="birth_place">
+                                {(props)=>{
+                                    const {field, meta} =props
+                                    return <TextField
+                                        error={meta.touched && meta.error}
+                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
+                                        type='text'
+                                        label="Lieu de naissance"
+                                        {...field}
+                                        value={field.value}
+                                        fullWidth
+                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
+                                        required
+                                        size='small'
+                                    />
+                                }}
+                            </Field>
+                        </Grid>
+                        <Grid item xs={12} md={4} mt={1}>
                             <Field name="email">
                                 {(props)=>{
                                     const {field, meta} =props
@@ -323,6 +357,25 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
                                         helperText={`${meta.touched && meta.error? meta.error : ''}`}
                                         type='email'
                                         label="Adresse Email"
+                                        {...field}
+                                        value={field.value}
+                                        fullWidth
+                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
+                                        required
+                                        size='small'
+                                    />
+                                }}
+                            </Field>
+                        </Grid>
+                        <Grid item xs={12} md={6} mt={1}>
+                            <Field name="cni_number">
+                                {(props)=>{
+                                    const {field, meta} =props
+                                    return <TextField
+                                        error={meta.touched && meta.error}
+                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
+                                        type='text'
+                                        label="CNI number"
                                         {...field}
                                         value={field.value}
                                         fullWidth
@@ -369,25 +422,6 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
                                 </Popper>
                             </>
                         </Grid>
-                        <Grid item xs={12} md={6} mt={1}>
-                            <Field name="cni_number">
-                                {(props)=>{
-                                    const {field, meta} =props
-                                    return <TextField
-                                        error={meta.touched && meta.error}
-                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
-                                        type='text'
-                                        label="CNI number"
-                                        {...field}
-                                        value={field.value}
-                                        fullWidth
-                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
-                                        required
-                                        size='small'
-                                    />
-                                }}
-                            </Field>
-                        </Grid>
                         <Grid display="flex" justifyContent="flex-end" item xs={12} md={12}>
                             <Button type='submit' variant="outlined">Next</Button>
                         </Grid>
@@ -397,70 +431,77 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
         }
     </Formik>
 }
-export const StepTwo =({next, prev,handleOpenPopper, validationTwoSchema, data, datas, isNew, diplomes, levels, trainings}) =>{
-    const handleSubmit = (values)=>{
-        next(values, true)
-    }
-    JSON.stringify(trainings)
-    return <Formik
-        initialValues={data}
-        validationSchema={validationTwoSchema}
-        onSubmit={handleSubmit}
-    >
-        {
-            ({values, setFieldValue }) => {
-                return <Form>
+
+export const StepTwo = ({ next, prev, handleOpenPopper, validationTwoSchema, data, datas, isNew, diplomes, levels, trainings }) => {
+    const handleSubmit = (values) => {
+        next(values, true);
+    };
+
+    return (
+        <Formik
+            initialValues={data}
+            validationSchema={validationTwoSchema}
+            onSubmit={handleSubmit}
+        >
+            {({ values, setFieldValue }) => (
+                <Form>
                     <Grid container spacing={2} className='two-step'>
-                        {!isNew && <Grid item xs={12} md={6} mt={1}>
-                            <Field name="matricule">
-                                {(props) => {
-                                    const {field, meta} = props
-                                    return <TextField
-                                        error={meta.touched && meta.error}
-                                        helperText={`${meta.touched && meta.error ? meta.error : ''}`}
-                                        type='text'
-                                        label="Matricule"
-                                        {...field}
-                                        value={field.value}
-                                        fullWidth
-                                        InputProps={meta.touched && meta.error ? inputProps(handleOpenPopper) : {}}
-                                        required
-                                        size='small'
-                                    />
-                                }}
-                            </Field>
-                        </Grid>}
-                        <Grid item xs={12} md={6} mt={1}>
+                        {!isNew && (
+                            <Grid item xs={12} md={4} mt={1}>
+                                <Field name="matricule">
+                                    {(props) => {
+                                        const { field, meta } = props;
+                                        return (
+                                            <TextField
+                                                error={meta.touched && meta.error}
+                                                helperText={`${meta.touched && meta.error ? meta.error : ''}`}
+                                                type='text'
+                                                label="Matricule"
+                                                {...field}
+                                                value={field.value}
+                                                fullWidth
+                                                InputProps={meta.touched && meta.error ? inputProps(handleOpenPopper) : {}}
+                                                required
+                                                size='small'
+                                            />
+                                        );
+                                    }}
+                                </Field>
+                            </Grid>
+                        )}
+                        <Grid item xs={12} md={4} mt={1}>
                             <Field
                                 as={TextField}
                                 select
-                                name="diplome"
-                                label="Choisir votre diplome d'admission"
+                                name="level"
+                                label="Classe LMD (Niveau)"
                                 variant="outlined"
+                                value={values.level || ''}
                                 onChange={(e) => {
-                                    const selectedInstitute = e.target.value;
+                                    setFieldValue('level', e.target.value);
                                 }}
                             >
-                                <MenuItem value="">Sélectionnez votre diplome d'admission</MenuItem>
-                                {diplomes.map((diplome, key) => (
-                                    <MenuItem key={key} value={diplome.id}>
-                                        {diplome.libelle}
+                                <MenuItem value="">Classe LMD (Niveau)</MenuItem>
+                                {levels.map((level, key) => (
+                                    <MenuItem key={key} value={level.id}>
+                                        {level.label}
                                     </MenuItem>
                                 ))}
                             </Field>
                         </Grid>
-                        <Grid item xs={12} md={6} mt={1}>
+                        <Grid item xs={12} md={4} mt={1}>
                             <Field
                                 as={TextField}
                                 select
                                 name="field"
-                                label="Choisir votre filliere"
+                                label="Choisir votre filière"
                                 variant="outlined"
+                                value={values.field || ''}
                                 onChange={(e) => {
-                                    const selectedInstitute = e.target.value;
+                                    setFieldValue('field', e.target.value);
                                 }}
                             >
-                                <MenuItem value="">Sélectionnez votre filliere</MenuItem>
+                                <MenuItem value="">Sélectionnez votre filière</MenuItem>
                                 {datas.map((data, key) => (
                                     <MenuItem key={key} value={data}>
                                         {data}
@@ -472,11 +513,32 @@ export const StepTwo =({next, prev,handleOpenPopper, validationTwoSchema, data, 
                             <Field
                                 as={TextField}
                                 select
+                                name="diplome"
+                                label="Choisir votre diplôme d'admission"
+                                variant="outlined"
+                                value={values.diplome || ''}
+                                onChange={(e) => {
+                                    setFieldValue('diplome', e.target.value);
+                                }}
+                            >
+                                <MenuItem value="">Sélectionnez votre diplôme d'admission</MenuItem>
+                                {diplomes.map((diplome, key) => (
+                                    <MenuItem key={key} value={diplome.id}>
+                                        {diplome.libelle}
+                                    </MenuItem>
+                                ))}
+                            </Field>
+                        </Grid>
+                        <Grid item xs={12} md={6} mt={1}>
+                            <Field
+                                as={TextField}
+                                select
                                 name="training"
                                 label="Choisir le type de formation"
                                 variant="outlined"
+                                value={values.training || ''}
                                 onChange={(e) => {
-                                    const selectedInstitute = e.target.value;
+                                    setFieldValue('training', e.target.value);
                                 }}
                             >
                                 <MenuItem value="">Choisir le type de formation</MenuItem>
@@ -487,32 +549,17 @@ export const StepTwo =({next, prev,handleOpenPopper, validationTwoSchema, data, 
                                 ))}
                             </Field>
                         </Grid>
-                        <Grid item xs={12} md={6} mt={1}>
-                            <Field
-                                as={TextField}
-                                select
-                                name="level"
-                                label="Classe LMD (Niveau)"
-                                variant="outlined"
-                                onChange={(e) => {
-                                    const selectedInstitute = e.target.value;
-                                }}
-                            >
-                                <MenuItem value="">Classe LMD (Niveau)</MenuItem>
-                                {levels.map((level, key) => (
-                                    <MenuItem key={key} value={level.id}>
-                                        {level.label}
-                                    </MenuItem>
-                                ))}
-                            </Field>
-                        </Grid>
                         <Grid display="flex" justifyContent="end" item xs={12} md={12}>
-                            <Button type='button' onClick={()=> prev(values)} variant="outlined">prev</Button>
-                            <Button type='submit' sx={{backgroundColor:"var(--primary)", marginLeft:"16px"}} variant="contained">Submit</Button>
+                            <Button type='button' onClick={() => prev(values)} variant="outlined">
+                                prev
+                            </Button>
+                            <Button type='submit' sx={{ backgroundColor: 'var(--primary)', marginLeft: '16px' }} variant="contained">
+                                Submit
+                            </Button>
                         </Grid>
                     </Grid>
                 </Form>
-            }
-        }
-    </Formik>
-}
+            )}
+        </Formik>
+    );
+};

@@ -1,19 +1,27 @@
 .registration{
-    display: grid;
+    display: flex;
     justify-content: center;
     min-height: 100vh;
     align-items: center;
 }
+.registration .disabled {
+    opacity: 0.5; /* Rend les étapes inactives partiellement transparentes */
+    pointer-events: none; /* Désactive les interactions avec les étapes inactives */
+}
 .registration .wrapper-registration{
-    min-height: 100vh;
-    width: 100vw;
     background-color: rgba(255, 255, 255, .5);
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 25px;
 }
 .registration h5{
     font-family: 'Rammetto One', cursive!important;
     font-size: 32px;
     text-align: center;
     margin-top: 32px;
+    color: var(--primary)
 }
 
 .registration .handle-salutation{
@@ -111,6 +119,7 @@
 .handle-text, .btn-questions, .wrapper-list-institute.last-slide, .btn-new-student{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .icon{
     width: 35px;
@@ -173,6 +182,11 @@
 }
 /* Utilisez une media query pour les appareils mobiles */
 @media screen and (max-width: 480px) {
+    .registration .wrapper-registration{
+        border:none;
+        width: 100%;
+        padding: 16px!important;
+    }
     .MuiAlert-message{
         font-size: 10px!important;
     }

@@ -16,10 +16,6 @@ import {REGISTER_URL} from "../../components/utils/utilsFunction";
 
 const texts = [
     "Tous les services de ton université sur EDUCAMER pour une vie académique plus facile.",
-    "Trouve tout ce dont tu as besoin pour réussir tes études sur EDUCAMER.",
-    "Simplifie ta vie académique avec tous les services regroupés sur EDUCAMER.",
-    "EDUCAMER, ta plateforme universitaire tout-en-un pour une expérience étudiante optimale.",
-    "Accède à tous les outils et ressources dont tu as besoin sur EDUCAMER.",
     "Fais de tes études une expérience simplifiée avec EDUCAMER.",
     "EDUCAMER, ta clé pour une vie académique plus fluide.",
     "Découvre un monde d'opportunités académiques sur EDUCAMER.",
@@ -58,7 +54,7 @@ export default function Home() {
     }, [currentText, isDeleting, textIndex]);
 
     useEffect(() => {
-        document.title = 'EDUCAMER | Home'
+        document.title = 'ETUCAMER | Home'
     }, []);
 
     const settings = {

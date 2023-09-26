@@ -1,5 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {Box, Button, Fade, Grid, InputAdornment, Paper, Popper, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Fade, FormControlLabel,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Paper,
+    Popper,
+    Switch,
+    TextField,
+    Typography
+} from "@mui/material";
 import '../../../assets/css/web/login.css'
 import logo from '../../../assets/images/logo1.png'
 import {Field, Form, Formik} from "formik";
@@ -8,19 +20,23 @@ import * as Yup from "yup";
 import InputCheckBox from "../../../components/utils/InputCheckBox";
 import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../../components/utils/utilsFunction";
-import {ArrowBack} from "@mui/icons-material";
+import {ArrowBack, Visibility, VisibilityOff} from "@mui/icons-material";
+import {Alert} from "@mui/lab";
 export default function Login() {
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false);
     useEffect(()=>{
-        document.title = 'EDUCAMER | Login'
+        document.title = 'ETUCAMER | Login'
     }, [])
     const initialValues = {
         email: '',
-        password: ''
+        password: '',
+        remember_me:false
     };
     const validationSchema = Yup.object({
         email: Yup.string().email('email invalid').required("L' email est requis"),
         password: Yup.string().matches(/^[a-zA-Z0-9\s]+$/, 'mot de passe invalid').required('Le mot passe est requis'),
+        remember_me:Yup.boolean()
     });
     const handleSubmit = (values, {resetForm}) =>{
         console.log(values)
@@ -49,11 +65,17 @@ export default function Login() {
                         <Typography variant='body1' mt={1}><strong>Pourquoi pas vous connecter dès maintenant ? 📚</strong></Typography>
                     </Grid>
                     <Grid className='second_section' item xs={12} md={5}>
-                        <Typography variant='h5' my={3}>Inscription</Typography>
+                        <Box className='login-logo-mobile' width="100%" display='flex' justifyContent="center" onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}>
+                            <img style={{height:"100px", objectFit:"cover", objectPosition:"center"}} src={logo} alt='logo'/>
+                        </Box>
+                        <Typography variant='h5' my={3} >Inscription</Typography>
                         <Box className='login-redirect' sx={{display:'flex', alignItems:'center', justifyContent:'center', color:"var(--primary)"}}>
                             <ArrowBack />
                             <Link  to={HOME_URL} style={{textAlign:'center!important', marginLeft:'10px', color:"var(--primary)"}}>Retournez a la page d'acceuil</Link>
                         </Box>
+                        <Alert severity="error" style={{margin: "12px  0"}}>
+                            This is an error alert — <strong>check it out!</strong>
+                        </Alert>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -83,27 +105,45 @@ export default function Login() {
                                         </Grid>
                                         <Grid item xs={12} md={12} mt={1}>
                                             <Field name="password">
-                                                {(props)=>{
-                                                    const {field, meta } =props
-                                                    return <TextField
-                                                        error={meta.touched && meta.error}
-                                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
-                                                        sx={{ borderRadius: '30px' }}
-                                                        label="Mot de passe"
-                                                        {...field}
-                                                        value={field.value}
-                                                        fullWidth
-                                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
-                                                        required
-                                                        size='small'
-                                                    />
+                                                {(props) => {
+                                                    const { field, meta } = props;
+                                                    return (
+                                                        <TextField
+                                                            error={meta.touched && meta.error}
+                                                            helperText={`${meta.touched && meta.error ? meta.error : ''}`}
+                                                            sx={{ borderRadius: '30px' }}
+                                                            label="Mot de passe"
+                                                            type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                                            {...field}
+                                                            value={field.value}
+                                                            fullWidth
+                                                            required
+                                                            size='small'
+                                                            InputProps={{
+                                                                endAdornment: (
+                                                                    <IconButton
+                                                                        onClick={() => setShowPassword(!showPassword)}
+                                                                        edge="end"
+                                                                    >
+                                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                                    </IconButton>
+                                                                ),
+                                                            }}
+                                                        />
+                                                    );
                                                 }}
                                             </Field>
                                         </Grid>
                                         <Grid item className='remember_me' xs={12} sx={{display:'flex', alignItems:'center', justifyContent:"space-between"}}>
-                                            <Box>
-                                                <InputCheckBox name="remenber_me" />
-                                            </Box>
+                                            <Field type="checkbox" name="remember_me">
+                                                {({ field }) => (
+                                                    <FormControlLabel
+                                                        control={<Switch {...field} />}
+                                                        label="Se souvenir de moi"
+                                                    />
+                                                )}
+                                            </Field>
+
                                             <Box>
                                                 <Link to='/auth/forgot-password' style={{color:'var(--primary)', textDecoration:'underline'}}>Mot de passe oublié?</Link>
                                             </Box>
