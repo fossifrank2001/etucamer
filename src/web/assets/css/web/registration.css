@@ -1,0 +1,236 @@
+.registration{
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+}
+.registration .disabled {
+    opacity: 0.5; /* Rend les étapes inactives partiellement transparentes */
+    pointer-events: none; /* Désactive les interactions avec les étapes inactives */
+}
+.registration .MuiTypography-root.MuiTypography-body{
+    color: var(--secondary);
+}
+.registration .wrapper-registration{
+    background-color: rgba(255, 255, 255, .5);
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 25px;
+}
+.registration h5{
+    font-family: 'Rammetto One', cursive!important;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 32px;
+    color: var(--primary)
+}
+
+.registration .handle-salutation{
+    font-size: 16px!important;
+    margin: 16px auto;
+    font-weight: lighter;
+    text-align: center;
+}
+.registration .handle-connexion{font-weight: lighter; font-size: 16px!important;}
+.registration .handle-salutation strong{font-weight: bolder; font-size: 18px!important;}
+.registration .css-480o17-MuiGrid-root > .MuiGrid-item{
+    padding-left: 0!important;
+}
+.wrapper-item-step1{
+    display: grid;
+    row-gap: 18px;
+    grid-template-columns: repeat(1, auto);
+}
+.registration .css-1wc848c-MuiFormHelperText-root{
+    font-size: 12px!important;
+}
+.registration .MuiButtonBase-root.MuiButton-root{
+    text-transform: initial!important;
+}
+
+.registration .css-k4qjio-MuiFormHelperText-root.Mui-error{
+    font-size: 12px!important;
+}
+.registration .MuiFormControl-root.MuiFormControl-fullWidth, .registration .MuiFormControl-root.MuiTextField-root{
+    height: 50px;
+}
+.registration .MuiInputBase-root.MuiOutlinedInput-root{
+    height: 100%;
+}
+.registration .MuiFormControl-root.MuiTextField-root{
+    width: 100%;
+}
+.registration .MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd{
+    width: fit-content;
+}
+.registration .css-1nrlq1o-MuiFormControl-root{
+    width: 100%;
+}
+.registration .css-dmmspl-MuiFormGroup-root{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row!important;
+}
+/*-------------------------------------------------------------------------*/
+
+.registration .css-11lq3yg-MuiGrid-root{
+    /*width: 90%;*/
+    /*margin: 24px auto;*/
+}
+.wrapper-list-institute{
+    display: grid;
+    grid-template-columns:repeat(3, minmax(300px, 1fr));
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 16px;
+}
+
+.wrapper-list-institute .institute{
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px lightgray;
+    padding: 16px;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform .5s ease;
+}
+.wrapper-list-institute .institute:hover{
+    transform: scale(.98);
+}
+.wrapper-list-institute .wrapper-img{
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.wrapper-list-institute span:not(span.MuiStepLabel-root, span.MuiStepLabel-label){
+    font-weight: bolder;
+    margin-top: 16px;
+    text-transform: uppercase;
+}
+
+.registration .swiper.swiper-initialized {
+    padding: 32px 0;
+    width: 90%;
+    margin: 0 auto;
+}
+.handle-text, .btn-questions, .wrapper-list-institute.last-slide, .btn-new-student{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    margin: 0 16px;
+}
+.btn-questions{
+    justify-content: center;
+    gap: 24px!important;
+}
+.btn-questions .btn{
+    padding: 16px;
+    border-radius: 20px;
+}
+.wrapper-list-institute.last-slide{
+    flex-direction: column!important;
+}
+.registration .css-1hv8oq8-MuiStepLabel-label.MuiStepLabel-alternativeLabel {
+    margin-top: 0px!important;
+    text-transform: lowercase!important;
+}
+.btn-new-student {
+    justify-content: center;
+    gap: 24px;
+}
+
+.btn-new-student .button{
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.button .icon{
+    background-color: inherit;
+}
+.button  .icon .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium{
+    font-size: 35px;
+}
+.button p{
+    margin-top: 24px;
+    text-transform: initial;
+    font-size: 12px!important;
+}
+.button:nth-child(1){
+    color: var(--dark);
+}
+
+.button:nth-child(3){
+    color: var(--success);
+}
+
+.registration .MuiInputAdornment-root span{
+    margin-top: 0;
+}
+/* Utilisez une media query pour les appareils mobiles */
+@media screen and (max-width: 480px) {
+    .registration .wrapper-registration{
+        border:none;
+        width: 100%;
+        padding: 16px!important;
+    }
+    .MuiAlert-message{
+        font-size: 10px!important;
+    }
+    .icon{
+        width: 50px;
+    }
+    .button{
+        border: 1px solid lightgray!important;
+    }
+    .wrapper-list-institute {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr))!important; /* Une seule colonne */
+        justify-content: center;
+    }
+    .wrapper-list-institute.last-slide{
+        padding: 16px 1px!important;
+    }
+    .btn-new-student{
+        flex-direction: column!important;
+        padding: 0 24px;
+    }
+    .MuiPaper-elevation{
+        width: 100%!important;
+    }
+    .wrapper-list-institute button:not(.MuiPaper-root.MuiPaper-elevation form button){
+        width: 100%;
+    }
+    .registration .MuiPaper-root.MuiPaper-elevation:not(.MuiPaper-root.MuiPaper-elevation[role="alert"]){
+        padding: 24px 0!important;
+        box-shadow: none;
+    }
+    .registration .MuiStepLabel-label{
+        text-transform: lowercase;
+    }
+    .registration .btn-new-student button{
+        margin: 0!important;
+    }
+    .btn-new-student hr{
+        display: none;
+    }
+    .registration .css-k4qjio-MuiFormHelperText-root.Mui-error{
+        font-size: 6px!important;
+    }
+}
