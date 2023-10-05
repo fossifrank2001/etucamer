@@ -11,7 +11,6 @@ export default function WebLayout() {
             <Box>
                 <Outlet/>
             </Box>
-            <Footer/>
         </>
     )
 }

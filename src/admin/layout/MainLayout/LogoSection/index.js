@@ -14,7 +14,7 @@ const LogoSection = () => {
   const dispatch = useDispatch();
   return (
     <ButtonBase style={{width:"100%"}} disableRipple onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })} component={Link} to=''>
-      <Box style={{margin:"0 auto",width:"100%",height: { xs: '50px', md: '100px' }}}>
+      <Box style={{margin:"0 auto",width:"100%",height: { xs: '50px' }}}>
         <img src={logo} alt='logo-etucamer' style={{
           objectFit:'contain',
           objectPosition:"center",

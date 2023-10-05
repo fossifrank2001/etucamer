@@ -2,7 +2,7 @@
     background: url("../../images/register-img.jpg");
     background-position: center;
     background-size: cover;
-    position: relative;
+    /*position: relative;*/
 }
 .login .wrapper-login{
     min-height: 100vh;

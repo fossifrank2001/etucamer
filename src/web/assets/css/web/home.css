@@ -8,7 +8,7 @@ body p{
 .baniere{
     width: 100%;
     margin: 0 auto;
-    height: 500px;
+    height: 600px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -94,8 +94,8 @@ h5.high-text, h5.high-text span, .our-partner h5, .our-services h5, .our-testimo
     justify-content: center;
 }
 .remark{
-    transform: translate(32px, -32PX);
-    padding: 0 32px ;
+    transform: translate(0, -100PX);
+    padding: 0 0 40px 0 ;
     font-size: 24px;
 }
 .container-box{
@@ -133,7 +133,7 @@ h5.high-text{
 }
 
 .card-header span{
-    font-size: 32px;
+    font-size: 32px!important;
     font-weight: bolder;
     padding: 18px 0;
 }
@@ -212,6 +212,9 @@ h5.high-text{
     .wrapper-image-promoteur p{
         font-size: 16px !important;
         padding: 12px 24PX!important;
+    }
+    .promoteur-infos .card{
+        width: 100%;
     }
     .promoteur .css-1w1vwsi{
         font-size: 16px!important;

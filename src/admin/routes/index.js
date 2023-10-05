@@ -4,6 +4,7 @@ import {useRoutes} from 'react-router-dom';
 import AdminRoutes from './AdminRoutes';
 import AuthenticationRoutes from './AuthenticationRoutes';
 import WebRoutes from "./WebRoutes";
+import NotFoundRoutes from "./NotFoundRoutes";
 
 // ==============================|| ROUTING RENDER ||============================== //
 
@@ -11,6 +12,7 @@ export default function ThemeRoutes() {
   return useRoutes([
     AdminRoutes,
     AuthenticationRoutes,
-    WebRoutes
+    WebRoutes,
+    NotFoundRoutes
   ]);
 }

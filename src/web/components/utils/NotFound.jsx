@@ -14,10 +14,10 @@ function NotFound() {
             textAlign="center"
         >
             <Typography variant="h1">404</Typography>
-            <Typography variant="h4">Page Not Found</Typography>
-            <Typography variant="body1" sx={{fontWeight:'lighter'}}>The requested page could not be found.</Typography>
+            <Typography variant="h4">Page non trouvée</Typography>
+            <Typography variant="body1" sx={{fontWeight:'lighter'}}>La page demandée n'a pu être trouvée.</Typography>
             <Button variant="outlined" sx={{margin:'16px 0'}}  color="primary" component={Link} to={HOME_URL}>
-                Go to Home
+                Allez à la page d'acceuil:
             </Button>
         </Box>
     );

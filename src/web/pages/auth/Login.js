@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {
     Box,
-    Button,
-    Fade, FormControlLabel,
+    Button, CssBaseline,
+    FormControlLabel,
     Grid,
-    IconButton,
-    InputAdornment,
-    Paper,
-    Popper,
+    IconButton, Snackbar,
     Switch,
     TextField,
     Typography
@@ -22,12 +19,21 @@ import {Link, useNavigate} from "react-router-dom";
 import {HOME_URL} from "../../components/utils/utilsFunction";
 import {ArrowBack, Visibility, VisibilityOff} from "@mui/icons-material";
 import {Alert} from "@mui/lab";
+import {useTheme} from "@mui/material/styles";
 import config from "../../../config";
+import {CustomizeSnackBar} from "../../../admin/utils";
+import {useDispatch, useSelector} from "react-redux";
+import {SNACKBAR_OPEN} from "../../../admin/store/actions";
+import AnimateButton from "../../../admin/ui-component/extended/AnimateButton";
 export default function Login() {
+    const theme = useTheme()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false);
+    const {snackbarIsOpened, customization} = useSelector((state) => state.customization);
     useEffect(()=>{
-        document.title = 'ETUCAMER | Login'
+        document.title = 'SnapU | Connexion'
+        console.log(snackbarIsOpened, customization)
     }, [])
     const initialValues = {
         email: '',
@@ -36,11 +42,11 @@ export default function Login() {
     };
     const validationSchema = Yup.object({
         email: Yup.string().email('email invalid').required("L' email est requis"),
-        password: Yup.string().matches(/^[a-zA-Z0-9\s]+$/, 'mot de passe invalid').required('Le mot passe est requis'),
+        password: Yup.string().matches(/^[a-zA-Z0-9\s\-_.@]+$/, 'mot de passe invalid').required('Le mot passe est requis'),
         remember_me:Yup.boolean()
     });
     const handleSubmit = (values, {resetForm}) =>{
-        console.log(values)
+        dispatch({type: SNACKBAR_OPEN, snackbarIsOpened:true})
         navigate(config.defaultPath)
         resetForm()
     }
@@ -56,6 +62,13 @@ export default function Login() {
     }
     return (
         <Box className='login'>
+            <CustomizeSnackBar
+                type='success'
+                open={snackbarIsOpened}
+                message='successfully logged out'
+                position={{ vertical: 'top', horizontal: 'right' }}
+            />
+            <CssBaseline />
             <Grid className='wrapper-login'>
                 <Grid className='grid' container>
                     <Grid className='first_section' item xs={12} md={6}>
@@ -66,7 +79,7 @@ export default function Login() {
                         </Typography>
                         <Typography variant='body1' mt={1}><strong>Pourquoi pas vous connecter dès maintenant ? 📚</strong></Typography>
                     </Grid>
-                    <Grid className='second_section' item xs={12} md={5}>
+                    <Grid className='second_section' item xs={12} lg={4} md={5}>
                         <Box className='login-logo-mobile' width="100%" display='flex' justifyContent="center" onClick={()=> navigate(HOME_URL)} style={{cursor:"pointer"}}>
                             <img style={{height:"100px", objectFit:"cover", objectPosition:"center"}} src={logo} alt='logo'/>
                         </Box>
@@ -151,7 +164,9 @@ export default function Login() {
                                             </Box>
                                         </Grid>
                                         <Grid display="flex" justifyContent="flex-end" item xs={12} md={12}>
-                                            <Button type='submit'  style={{backgroundColor:'var(--primary)', width:'100%'}} variant="outlined">Connecter Vous</Button>
+                                            <AnimateButton sx={{width:'100%'}}>
+                                                <Button type='submit'  style={{backgroundColor:'var(--primary)', width:'100%'}} variant="outlined">Connecter Vous</Button>
+                                            </AnimateButton>
                                         </Grid>
                                         <Grid display="flex" justifyContent="flex-end" item xs={12} md={12}>
                                             <Typography mt={1} className='handle-login'>Vous n'avez pas de compte? <Link to='/auth/registration'>Crée un compte</Link> </Typography>

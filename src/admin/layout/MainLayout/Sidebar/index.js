@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {Box, Chip, Drawer, MenuItem, Stack, TextField, useMediaQuery} from '@mui/material';
+import {Box, Chip, Drawer, MenuItem, Stack, TextField, Typography, useMediaQuery} from '@mui/material';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -34,15 +34,14 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         console.log(values)
     };
     useEffect(() => {
-        // Appeler handleSubmit lorsque la langue change
         handleSubmit({ language: initialLanguage });
     }, [initialLanguage]);
     const drawer = (
     <>
       <BrowserView>
-          <Box className='header-aside' sx={{position:'fixed',boxShadow:"0 1px 5px lightgray", width:drawerWidth, zIndex:'10', backgroundColor:'white'}}>
+          <Box className='header-aside' sx={{position:'fixed', width:drawerWidth, zIndex:'10', backgroundColor:'white'}}>
               <Box sx={{ display: { xs: 'block', md: 'block' } }}>
-                  <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
+                  <Box sx={{ display: 'flex', py: 1, px:2, mx: 'auto' }}>
                       <LogoSection />
                   </Box>
               </Box>
@@ -79,14 +78,15 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                       }
                   </Formik>
               </Box>
+              <Typography sx={{textAlign:'center', width:'100%', lineHeight:'32px', display:'inline-block'}} variant='div'>Id SPU: <strong style={{color:"var(--primary)"}}>10045385</strong></Typography>
           </Box>
         <PerfectScrollbar
           component="div"
           style={{
-            height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 215px)',
+            height: !matchUpMd ? 'calc(100vh - 250px)' : 'calc(100vh - 250px)',
             paddingLeft: '16px',
             paddingRight: '16px',
-            transform:"translateY(215px)"
+            transform:"translateY(250px)"
           }}
         >
           <MenuList />

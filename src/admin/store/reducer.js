@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-
-// reducer import
 import customizationReducer from './customizationReducer';
 import {persistReducer} from "redux-persist";
 import storage from 'redux-persist/lib/storage';

@@ -10,7 +10,8 @@ const ActivitiesComponent = Loadable(lazy(() => import('../views/actualities')))
 const LessonsComponent = Loadable(lazy(() => import('../views/programs/Lessons')));
 const CcComponent = Loadable(lazy(() => import('../views/programs/ContinuousMonitoring')));
 const ExamsComponent = Loadable(lazy(() => import('../views/programs/Exams')));
-
+const AbsencesComponent = Loadable(lazy(() => import('../views/absences')))
+const ProfilComponent = Loadable(lazy(() => import('../views/profiles')))
 // ==============================|| ADMIN ROUTING ||============================== //
 const AdminRoutes = {
   path: '/admin',
@@ -62,6 +63,24 @@ const AdminRoutes = {
         {
           path: '',
           element: <ActivitiesComponent />
+        }
+      ]
+    },
+    {
+      path: 'absences',
+      children: [
+        {
+          path: '',
+          element: <AbsencesComponent />
+        }
+      ]
+    },,
+    {
+      path: 'profil',
+      children: [
+        {
+          path: '',
+          element: <ProfilComponent />
         }
       ]
     },

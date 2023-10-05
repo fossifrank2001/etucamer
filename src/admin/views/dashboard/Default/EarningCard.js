@@ -98,7 +98,7 @@ const EarningCard = ({ isLoading }) => {
                     </Avatar>
                   </Grid>
                   <Grid item>
-                    <Tooltip title='Voir plus...'>
+                    <Tooltip sx={{width: '100%'}} title='Plus de détails'>
                       <Avatar
                           variant="rounded"
                           sx={{
@@ -106,13 +106,16 @@ const EarningCard = ({ isLoading }) => {
                             ...theme.typography.mediumAvatar,
                             backgroundColor: theme.palette.secondary.dark,
                             color: theme.palette.secondary[200],
-                            zIndex: 1
+                            zIndex: 1,
+                            width: '100%'
                           }}
                           aria-controls="menu-earning-card"
                           aria-haspopup="true"
                           onClick={(e) => handleClick(e, ABSENCE_URL)}
                       >
-                        <MoreHorizIcon fontSize="inherit" />
+                        <Box sx={{display:'flex', p:2, alignItems:'center'}}>
+                          <Typography sx={{ms:1, fontSize:"12px"}} variant='span'>Voir plus</Typography>
+                        </Box>
                       </Avatar>
                     </Tooltip>
                   </Grid>

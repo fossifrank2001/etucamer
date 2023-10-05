@@ -1,16 +1,14 @@
 import {
     Button,
     Fade,
-    FormControl, FormControlLabel, FormLabel,
     Grid,
     InputAdornment,
     MenuItem,
     Paper,
-    Popper, Radio, RadioGroup,
+    Popper,
     TextField,
     Typography
 } from "@mui/material";
-import * as PropTypes from "prop-types";
 import {ErrorOutline} from "@mui/icons-material";
 import uy1 from '../../assets/images/uy1.png'
 import uy2 from  '../../assets/images/uy.png'
@@ -22,11 +20,11 @@ import uba from  '../../assets/images/uba.jpg'
 import uma from  '../../assets/images/uma.jpg'
 import {Field, Form, Formik} from "formik";
 import React, {useState} from "react";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import dayjs from "dayjs";
+import 'dayjs/locale/fr'; // Import the French locale if needed
 
 /*
 * @param {String} code
@@ -286,7 +284,6 @@ export const universites = [
 ]
 export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open, anchorEl, placement}) =>{
     const handleSubmit = (values)=>{
-        console.log(values)
         next(values)
     }
     return <Formik
@@ -342,6 +339,12 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
                                     label="Date de naissance"
                                     value={values.birth_day} // Bind value to form values
                                     onChange={(date) => setFieldValue('birth_day', date)} // Update birth_day field in form values
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            value={dayjs(values.birth_day).format('DD-MM-YYYY')} // Use the formatted date
+                                        />
+                                    )}
                                 />
                             </LocalizationProvider>
                         </Grid>
@@ -450,7 +453,7 @@ export const StepOne =({next, handleOpenPopper, validationOneSchema, data, open,
 
 export const StepTwo = ({ next, prev, handleOpenPopper, validationTwoSchema, data, datas, isNew, diplomes, levels, trainings }) => {
     const handleSubmit = (values) => {
-        next(values, true);
+        next(values);
     };
 
     return (
@@ -569,8 +572,8 @@ export const StepTwo = ({ next, prev, handleOpenPopper, validationTwoSchema, dat
                             <Button type='button' onClick={() => prev(values)} variant="outlined">
                                 prev
                             </Button>
-                            <Button type='submit' sx={{ backgroundColor: 'var(--primary)', marginLeft: '16px' }} variant="contained">
-                                Submit
+                            <Button type='submit' sx={{marginLeft: '16px' }} variant="outlined">
+                                Next
                             </Button>
                         </Grid>
                     </Grid>
@@ -579,3 +582,77 @@ export const StepTwo = ({ next, prev, handleOpenPopper, validationTwoSchema, dat
         </Formik>
     );
 };
+
+export const StepThree =({next, handleOpenPopper, validationThreeSchema, data, prev}) =>{
+    const handleSubmit = (values)=>{
+        next(values, true);
+    }
+    return <Formik
+        initialValues={data}
+        validationSchema={validationThreeSchema}
+        onSubmit={handleSubmit}
+    >
+        {
+            ({values}) => {
+                return <Form >
+                    <Grid container spacing={2} className='thirs-step'>
+                        <Grid item xs={12} md={6} mt={1}>
+                            <Field name="password">
+                                {(props)=>{
+                                    const {field, meta } =props
+                                    return <TextField
+                                        error={meta.touched && meta.error}
+                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
+                                        sx={{ borderRadius: '30px' }}
+                                        label="Mot de passe"
+                                        {...field}
+                                        value={field.value}
+                                        fullWidth
+                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
+                                        required
+                                        size='small'
+                                        type='password'
+                                    />
+                                }}
+                            </Field>
+                        </Grid>
+                        <Grid item xs={12} md={6} mt={1}>
+                            <Field name="confirmation_password">
+                                {(props)=>{
+                                    const {field, meta} =props
+                                    return <TextField
+                                        error={meta.touched && meta.error}
+                                        helperText={`${meta.touched && meta.error? meta.error : ''}`}
+                                        type='password'
+                                        label="Confirmez votre mot de passe"
+                                        {...field}
+                                        value={field.value}
+                                        fullWidth
+                                        InputProps={meta.touched && meta.error? inputProps(handleOpenPopper): {}}
+                                        required
+                                        size='small'
+                                    />
+                                }}
+                            </Field>
+                        </Grid>
+
+                        <Grid display="flex" justifyContent="flex-end" item xs={12} md={12}>
+                            <Button type='button' onClick={() => prev(values)} variant="outlined">
+                                prev
+                            </Button>
+                            <Button type='submit' sx={{
+                                bgcolor:'var(--primary)',
+                                marginLeft: '16px' ,
+                                color:'var(--standard)',
+                                '&:hover': {
+                                    bgcolor:'var(--standard)',
+                                    color:'var(--primary)',
+                                }
+                            }} variant="outlined">Submit</Button>
+                        </Grid>
+                    </Grid>
+                </Form>
+            }
+        }
+    </Formik>
+}

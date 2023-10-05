@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -37,14 +37,16 @@ import User1 from '../../../../assets/images/users/user-round.svg';
 
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
-import {LOGIN_URL} from "../../../../../web/components/utils/utilsFunction";
+import {LOGIN_URL, PROFIL_URL} from "../../../../../web/components/utils/utilsFunction";
 import {greatingPeople} from "../../../../../web/components/utils/function";
+import {SNACKBAR_OPEN} from "../../../../store/actions";
 
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [sdm, setSdm] = useState(true);
@@ -57,6 +59,7 @@ const ProfileSection = () => {
    * */
   const anchorRef = useRef(null);
   const handleLogout = async () => {
+    dispatch({type: SNACKBAR_OPEN, snackbarIsOpened:true})
     navigate(LOGIN_URL);
   };
 
@@ -69,8 +72,7 @@ const ProfileSection = () => {
 
   const handleListItemClick = (event, index, route = '') => {
     setSelectedIndex(index);
-    handleClose(event);
-
+    handleClose(event)
     if (route && route !== '') {
       navigate(route);
     }
@@ -107,7 +109,10 @@ const ProfileSection = () => {
             }
           },
           '& .MuiChip-label': {
-            lineHeight: 0
+            lineHeight: 0,
+          },
+          '&:hover .MuiChip-label p': {
+            color: 'white!important',
           }
         }}
         icon={
@@ -124,7 +129,7 @@ const ProfileSection = () => {
             color="inherit"
           />
         }
-        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
+        label={<Typography variant='body2' color={theme.palette.primary.main}>Etudiant</Typography>}
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
@@ -155,19 +160,6 @@ const ProfileSection = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                  <Box sx={{ p:2 }}>
-                    <Stack>
-                      <Stack direction="column" spacing={1} alignItems="center">
-                        <Box sx={{ display:'flex' }}>
-                            <Typography variant="h4">{greatingPeople()}, </Typography>
-                            <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>Johne Doe</Typography>
-                        </Box>
-                          <Typography component="div" variant="h4" sx={{ fontWeight: 900, textAlign:'center' }}>
-                              john.doe@example.com
-                          </Typography>
-                      </Stack>
-                    </Stack>
-                  </Box>
                   <Divider />
                   <PerfectScrollbar style={{ height: 'fit-content', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ px: 2 }}>
@@ -190,7 +182,7 @@ const ProfileSection = () => {
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 0}
-                          onClick={(event) => handleListItemClick(event, 0, '#')}
+                          onClick={(event) => handleListItemClick(event, 0, PROFIL_URL)}
                         >
                           <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.3rem" />

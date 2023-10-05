@@ -1,34 +1,267 @@
-/**
- * Password validator for login pages
- */
-import value from 'assets/scss/_themes-vars.module.scss';
+export const progressionLessons = [
+  {
+    id: 1,
+    lesson: 'Physique',
+    beginDate: undefined,
+    progression: 0,
+    hours: 50,
+    ccIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 2,
+    lesson: 'Mathématiques',
+    beginDate: '12/09/2023',
+    hours: 50,
+    progression: 65,
+    ccIsProgramated: {
+      statut: true,
+      date: '12/11/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 3,
+    lesson: 'Chimie',
+    beginDate: '15/09/2023',
+    hours: 12,
+    progression: 25,
+    ccIsProgramated: {
+      statut: true,
+      date: '20/10/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 4,
+    lesson: 'Biologie',
+    beginDate: '18/09/2023',
+    hours: 35,
+    progression: 40,
+    ccIsProgramated: {
+      statut: true,
+      date: '25/10/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 5,
+    lesson: 'Histoire',
+    beginDate: '21/09/2023',
+    hours: 20,
+    progression: 100,
+    ccIsProgramated: {
+      statut: true,
+      date: '15/11/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 6,
+    lesson: 'Géographie',
+    beginDate: '24/09/2023',
+    hours: 50,
+    progression: 60,
+    ccIsProgramated: {
+      statut: true,
+      date: '18/11/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 7,
+    lesson: 'Langue étrangère',
+    beginDate: undefined,
+    hours: 50,
+    progression: 50,
+    ccIsProgramated: {
+      statut: true,
+      date: '22/11/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 8,
+    lesson: 'Arts plastiques',
+    beginDate: '30/09/2023',
+    hours: 50,
+    progression: 0,
+    ccIsProgramated: {
+      statut: true,
+      date: '28/11/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 9,
+    lesson: 'Informatique',
+    beginDate: '03/10/2023',
+    hours: 5,
+    progression: 45,
+    ccIsProgramated: {
+      statut: true,
+      date: '05/12/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+  {
+    id: 10,
+    lesson: 'Éducation physique',
+    beginDate: undefined,
+    hours: 18,
+    progression: 0,
+    ccIsProgramated: {
+      statut: true,
+      date: '10/12/2023',
+    },
+    examIsProgramated: {
+      statut: false,
+      date: undefined,
+    },
+  },
+];
 
-// has number
-const hasNumber = (number) => new RegExp(/[0-9]/).test(number);
+export const levels =[
+    {
+      level: 1,
+      semesters: [
+        {
+          number: 1,
+          subjects: [
+            {
+              id: 1,
+              lesson: 'Mathematique',
+              beginDate: "12/09/2023",
+              progression: 100,
+              hours: 15,
+              ccIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.4,
+                max_score: 20
+              },
+              examIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.6,
+                max_score: 20
+              },
+            },
+            {
+              id: 2,
+              lesson: 'Physics',
+              beginDate: '06/01/2023',
+              progression: 90,
+              hours: 8,
+              ccIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.4,
+                max_score: 20
+              },
+              examIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.6,
+                max_score: 20
+              },
+            },
+            {
+              id: 3,
+              lesson: 'Chimie',
+              beginDate: '12/09/2023',
+              progression: 82,
+              hours: 12,
+              ccIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.4,
+                max_score: 20
+              },
+              examIsProgramated: {
+                statut: false,
+                date: undefined,
+                weight: 0.6,
+                max_score: 20
+              },
+            }
+          ]
+        },
+        {
+          number: 2,
+          subjects: [
+            {
+              id: 1,
+              lesson: 'Biologie',
+              beginDate: '18/09/2023',
+              hours: 35,
+              progression: 40,
+              ccIsProgramated: {
+                statut: true,
+                date: '25/10/2023',
+                weight: 0.4,
+                max_score: 20
+              },
+              examIsProgramated: {
+                statut: false,
+                date: undefined,
+                "weight": 0.6,
+                "max_score": 20
+              },
+            },
+            {
+              id: 2,
+              lesson: 'Histoire',
+              beginDate: '21/09/2023',
+              hours: 20,
+              progression: 100,
+              ccIsProgramated: {
+                statut: true,
+                date: '15/11/2023',
+                weight: 0.4,
+                max_score: 20
+              },
+              examIsProgramated: {
+                statut: false,
+                date: undefined,
+                "weight": 0.6,
+                "max_score": 20
+              },
+            }
+          ]
+        }
+      ]
+    }
+]
 
-// has mix of small and capitals
-const hasMixed = (number) => new RegExp(/[a-z]/).test(number) && new RegExp(/[A-Z]/).test(number);
 
-// has special chars
-const hasSpecial = (number) => new RegExp(/[!#@$%^&*)(+=._-]/).test(number);
-
-// set color based on password strength
-export const strengthColor = (count) => {
-  if (count < 2) return { label: 'Poor', color: value.errorMain };
-  if (count < 3) return { label: 'Weak', color: value.warningDark };
-  if (count < 4) return { label: 'Normal', color: value.orangeMain };
-  if (count < 5) return { label: 'Good', color: value.successMain };
-  if (count < 6) return { label: 'Strong', color: value.successDark };
-  return { label: 'Poor', color: value.errorMain };
-};
-
-// password strength indicator
-export const strengthIndicator = (number) => {
-  let strengths = 0;
-  if (number.length > 5) strengths += 1;
-  if (number.length > 7) strengths += 1;
-  if (hasNumber(number)) strengths += 1;
-  if (hasSpecial(number)) strengths += 1;
-  if (hasMixed(number)) strengths += 1;
-  return strengths;
-};

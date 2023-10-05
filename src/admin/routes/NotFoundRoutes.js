@@ -5,19 +5,13 @@ import Loadable from '../ui-component/Loadable';
 import WebLayout from "../../web/layouts/WebLayout";
 import {Home} from "@mui/icons-material";
 
-const HomePage = Loadable(lazy(() => import('../../web/pages/Home')));
+const NotFoundPage = Loadable(lazy(() => import('../../web/components/utils/NotFound')));
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
-const WebRoutes = {
-    path: '/',
-    element: <WebLayout />,
-    children: [
-        {
-            path: '/',
-            element: <HomePage/>
-        },
-    ]
+const NotFoundRoutes = {
+    path: '*',
+    element: <NotFoundPage /> // Remplacez NotFound par le composant de votre page 404
 };
 
-export default WebRoutes;
+export default NotFoundRoutes;

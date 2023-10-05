@@ -1,0 +1,3 @@
+.absences .MuiPagination-ul, .skeleto-pagination{
+    justify-content: flex-end;
+}

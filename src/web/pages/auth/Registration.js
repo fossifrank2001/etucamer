@@ -16,7 +16,7 @@ import {
     diplomes,
     niveaux,
     replaceSpacesWithUnderscores,
-    StepOne,
+    StepOne, StepThree,
     StepTwo, trainingType,
     universites
 } from "../../components/utils/function";
@@ -32,13 +32,13 @@ import 'swiper/css/pagination';
 import {Navigation } from 'swiper/modules';
 import {ChevronLeft, FileCopy, HelpCenter, Warning} from "@mui/icons-material";
 import InputCheckBox from "../../components/utils/InputCheckBox";
-import {HOME_URL, LOGIN_URL} from "../../components/utils/utilsFunction";
+import {HOME_URL, LOGIN_URL, REGISTRATION_URL} from "../../components/utils/utilsFunction";
 import logo from "../../assets/images/logo1.png";
 
 export default function Registration() {
     const navigate = useNavigate()
     useEffect(()=>{
-        document.title = 'ETUCAMER | Registration'
+        document.title = 'SnapU | Inscription'
         setDataUniv(universites)
     }, [])
     const [isClick, setIsClick]= useState(false);
@@ -62,7 +62,7 @@ export default function Registration() {
         birth_day:null,
         birth_place:'',
         password:'',
-        password_confirmation:'',
+        confirmation_password:'',
     }
     const [data, setData] = useState(initialValues)
     const validationOneSchema = Yup.object({
@@ -89,12 +89,19 @@ export default function Registration() {
             .required('Le lieu de naissance est requis'),
     });
     const validationTwoSchema = Yup.object({
-        matricule: Yup.string().required('le matricule est requis'),
+        matricule: Yup.string().nullable(),
         field: Yup.string().required('La filliere est requis'),
         level: Yup.string().required('Le niveau d\'admission est requis'),
         diplome: Yup.string().required('Veillez choisir le diplome d\'admission'),
         training: Yup.string().required('Veillez choisir le type de formation'),
     });
+    const validationThreeSchema = Yup.object({
+            password: Yup.string()
+                .min(6, "Le mot de passe doit contenir au moins 06 caracteres")
+                .required("Le mot de passe est requis"),
+            confirmation_password: Yup.string()
+                .oneOf([Yup.ref("password"), null], "Les mots de passe doivent etre semblables")
+                .required("Le mot de passe de confirmation est requis"),});
 
     //Handle Popper functionnalities
     const [open, setOpen] = useState(false)
@@ -164,10 +171,18 @@ export default function Registration() {
             diplomes={diplomes}
             levels={niveaux}
             trainings={trainingType}
+        />,
+        <StepThree
+            next={handleNextStep}
+            prev={handlePrevStep}
+            validationThreeSchema={validationThreeSchema}
+            data={data}
+            handleOpenPopper={handleOpenPopper}
         />
     ]
     const handleFormSubmit = (values, { resetForm }) => {
         console.log(values);
+        navigate(REGISTRATION_URL)
         resetForm();
     };
     return (

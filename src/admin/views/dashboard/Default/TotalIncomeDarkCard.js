@@ -10,7 +10,7 @@ import TotalIncomeCard from '../../../ui-component/cards/Skeleton/TotalIncomeCar
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import {BookmarkAddedOutlined} from "@mui/icons-material";
+import {BookmarkAddedOutlined, LocalActivity} from "@mui/icons-material";
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -42,7 +42,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL INCOME DARK CARD ||============================== //
 
-const TotalIncomeDarkCard = ({ isLoading }) => {
+const TotalActivities = ({ isLoading }) => {
   const theme = useTheme();
 
   return (
@@ -64,7 +64,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                       color: '#fff'
                     }}
                   >
-                    <BookmarkAddedOutlined fontSize="inherit" />
+                    <LocalActivity fontSize="inherit" />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -80,7 +80,7 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
                   }
                   secondary={
                     <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                      Totale Matières.
+                      Totale Activitées practiquées.
                     </Typography>
                   }
                 />
@@ -93,8 +93,8 @@ const TotalIncomeDarkCard = ({ isLoading }) => {
   );
 };
 
-TotalIncomeDarkCard.propTypes = {
+TotalActivities.propTypes = {
   isLoading: PropTypes.bool
 };
 
-export default TotalIncomeDarkCard;
+export default TotalActivities;

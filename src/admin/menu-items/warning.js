@@ -14,7 +14,7 @@ const warning = {
             title: 'Avertissements',
             type: 'item',
             url: '/admin/warning',
-            icon: icons.IconActivity,
+            icon: icons.IconAlertTriangle,
             breadcrumbs: false
         }
     ]

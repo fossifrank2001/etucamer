@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Box,
     Typography,
@@ -8,7 +8,7 @@ import {
     Button,
     List,
     SwipeableDrawer,
-    ListItemButton, ListItemIcon, ListItemText, ListItem, Divider, Popover
+    ListItemButton, ListItemIcon, ListItemText, ListItem, Divider, Popover, TextField
 } from "@mui/material";
 import {ArrowDropDown, Close, Dialpad, KeyboardArrowDown, Mail, Phone, Segment} from "@mui/icons-material";
 import '../../../assets/css/web/navbar.css'
@@ -19,6 +19,9 @@ import Tab from '@mui/material/Tab';
 import { useNavigate } from 'react-router-dom';
 import {LOGIN_URL} from "../../utils/utilsFunction";
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import {Field, Form, Formik} from "formik";
+import * as Yup from "yup";
+import AnimateButton from "../../../../admin/ui-component/extended/AnimateButton";
 
 
 const menuOptions = [
@@ -31,7 +34,12 @@ export default function NavBar() {
     const [selectedValue, setSelectedValue] = useState('fr-FR');
     const [open, setOpen] = useState(false);
     const [selectedContact, setSelectedContact] = useState('');
-
+    const [initialLanguage, setInitialLanguage] = useState("fr-FR");
+    const validationSchema = Yup.object({
+        language: Yup.string()
+            .required("La langue est requise")
+            .notOneOf([""], "La langue ne peut pas être vide"), // Ajoutez cette validation
+    });
     const handleContactChange = (event) => {
         setSelectedContact(event.target.value);
     };
@@ -108,6 +116,13 @@ export default function NavBar() {
             </List>
         </Box>
     );
+    const handleSubmit = (values) => {
+        console.log(values)
+    };
+    useEffect(() => {
+        // Appeler handleSubmit lorsque la langue change
+        handleSubmit({ language: initialLanguage });
+    }, [initialLanguage]);
     return (
         <Box component='navbar'>
             <Box component='div' className='first_bloc_nav'>
@@ -152,25 +167,35 @@ export default function NavBar() {
                     </Box>
                     <Box className='flex-two'>
                         <Box className='sub-flex'>
-                            <FormControl variant="outlined">
-                                <Select
-                                    labelId="dropdown-label"
-                                    id="dropdown-select"
-                                    value={selectedValue}
-                                    onChange={handleChange}
-                                    label="Select an option"
-                                    style={{
-                                        color:"var(--standard)",
-                                        fontWeight:"bolder",
-                                    }}
-                                >
-                                    {menuOptions.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <Formik
+                                initialValues={{ language: initialLanguage }}
+                                validationSchema={validationSchema}
+                                onSubmit={handleSubmit}
+                            >
+                                {({ values, setFieldValue }) => (
+                                    <Form>
+                                        <Field
+                                            as={TextField}
+                                            select
+                                            name="language"
+                                            variant="outlined"
+                                            value={values.language || ''}
+                                            onChange={(e) => {
+                                                setInitialLanguage(e.target.value);
+                                                setFieldValue("language", e.target.value);
+                                            }}
+                                            fullWidth
+                                        >
+                                            {menuOptions.map((language, key) => (
+                                                <MenuItem key={key} value={language.value}>
+                                                    {language.label}
+                                                </MenuItem>
+                                            ))}
+                                        </Field>
+                                    </Form>
+                                )
+                                }
+                            </Formik>
                         </Box>
                     </Box>
                 </Box>
@@ -193,7 +218,9 @@ export default function NavBar() {
                             <Tab label="Nos partenaires" className='link' />
                             <Tab label="Nos contacts" className='link' />
                         </Tabs>
-                        <Button variant="standard" onClick={handleClick} sx={{textTransform:"initial"}} className='login-btn'>Connexion</Button>
+                        <AnimateButton>
+                            <Button variant="standard" onClick={handleClick} sx={{textTransform:"initial"}} className='login-btn'>Connexion</Button>
+                        </AnimateButton>
                     </Box>
                     <Box className='links-burger'>
                         {['left'].map((anchor) => (

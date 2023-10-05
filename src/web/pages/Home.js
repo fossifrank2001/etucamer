@@ -22,7 +22,8 @@ import Testimony from './Testimony';
 import { useNavigate } from 'react-router-dom';
 import { REGISTER_URL } from '../components/utils/utilsFunction';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css';
+import Footer from "../components/partials/web/Footer"; // Import AOS styles
 
 const texts = [
     "Tous les services de ton université sur EDUCAMER pour une vie académique plus facile.",
@@ -65,12 +66,11 @@ export default function Home() {
     }, [currentText, isDeleting, textIndex]);
 
     useEffect(() => {
-        document.title = 'ETUCAMER | Home';
+        document.title = 'SnapU | Home';
         AOS.init({
             duration: 1000, // Specify the animation duration in milliseconds
         });
     }, []);
-
 
     const settings = {
         dots: true,
@@ -122,7 +122,6 @@ export default function Home() {
                         </Slider>
                     </Grid>
                 </Grid>
-
                 <Grid container className="wrapper">
                     <Grid
                         display="flex"
@@ -136,7 +135,7 @@ export default function Home() {
                         width="100%"
                         height="100%"
                         className="wrapper-carousel-text"
-                    >
+                    >{/*
                         <Typography
                             className="remark"
                             color="var(--standard)"
@@ -146,10 +145,20 @@ export default function Home() {
                             data-aos-duration="8000"
                         >
                             La plateforme par excellence de l'étudiant Camerounais !
-                        </Typography>
+                        </Typography>*/}
                         <Grid container className="">
                             <Grid className="" item xs={12} md={10}>
                                 <Box className="container-box">
+                                    <Typography
+                                        className="remark"
+                                        color="var(--standard)"
+                                        component="div"
+
+                                        data-aos="zoom-in-up"
+                                        data-aos-duration="8000"
+                                    >
+                                        La plateforme par excellence de l'étudiant Camerounais !
+                                    </Typography>
                                     <Typography
                                         className="high-text"
                                         color="var(--standard)"
@@ -238,6 +247,8 @@ export default function Home() {
                 </Card>
             </Box>
             <AboutUs />
+            {/*Footer represente our services*/}
+            <Footer/>
             <Testimony />
             <OurPartner />
             <OurContact />

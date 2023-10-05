@@ -64,7 +64,7 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
         };
       }
       return (
-        <motion.div ref={ref} whileHover={{ scale: scale?.hover }} whileTap={{ scale: scale?.tap }}>
+        <motion.div sx={{width: '100%'}}  ref={ref} whileHover={{ scale: scale?.hover }} whileTap={{ scale: scale?.tap }}>
           {children}
         </motion.div>
       );

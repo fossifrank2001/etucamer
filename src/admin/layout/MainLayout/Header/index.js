@@ -30,9 +30,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
           }
         }}
       >
-        {/*<Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-          <LogoSection />
-        </Box>*/}
         <ButtonBase sx={{ borderRadius: '6px', overflow: 'hidden' }}>
           <Avatar
             variant="rounded"
@@ -43,8 +40,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
               background: theme.palette.secondary.light,
               color: theme.palette.secondary.dark,
               '&:hover': {
-                background: theme.palette.secondary.dark,
-                color: theme.palette.secondary.light
+                background: theme.palette.secondary.main,
+                color: 'white'
               }
             }}
             onClick={handleLeftDrawerToggle}
@@ -55,12 +52,10 @@ const Header = ({ handleLeftDrawerToggle }) => {
         </ButtonBase>
       </Box>
 
-      {/* header search */}
       <SearchSection />
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
 
-      {/* notification & profile */}
       <NotificationSection />
       <ProfileSection />
     </>
