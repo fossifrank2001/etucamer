@@ -20,11 +20,17 @@ import {PendingActions} from "@mui/icons-material";
 import { gridSpacing } from "../../store/constant";
 import TotalJustifiedAbsence from "./TotalJustifiedAbsence";
 import TotalNotJustifiedAbsence from "./TotalNotJustifiedAbsence";
-import { useTable, useFilters, useSortBy } from "react-table";
+import { useFilters, useSortBy, useTable, useGlobalFilter,usePagination } from "react-table";
 import { useTheme,styled  } from "@mui/material/styles";
-import {absences, awaitSync, CustomizeBreadcrumbs, getChipStyles, lessonsOptions, statusOptions} from "../../utils";
+import {
+    absences,
+    awaitSync,
+    CustomizeBreadcrumbs,
+    getChipStyles, GlobalSearchInputTable, Pagination,
+    SortableSelectTable,
+    statusOptions
+} from "../../utils";
 import {Field, Form, Formik} from "formik";
-import Pagination from '@mui/material/Pagination';
 import '../../assets/css/absences.css'
 import Skeleton from "@mui/material/Skeleton";
 import {breadcrumbsAbsences} from "../../utils/breadcrum";
@@ -47,7 +53,7 @@ const StyledTableRow = styled(TableRow)`
 const StyledTableCell = styled(TableCell)`
   padding: 8px;
   border: 1px solid #ddd;
-  text-align: left;
+  text-align: center;
 `
 const TableContainer = styled("div")`
   width: 100%;
@@ -63,7 +69,7 @@ export default function Absences() {
         });
     }, []);
     const theme = useTheme();
-    const { chipSX, chipErrorSX, chipWarningSX, chipSuccessSX } = getChipStyles(theme);
+    const { chipErrorSX, chipSuccessSX } = getChipStyles(theme);
     const columns = useMemo(
         () => [
             {
@@ -97,22 +103,9 @@ export default function Absences() {
                         return (
                             <div style={{ display: "flex", justifyContent: "center" }}>
                                 <Tooltip title={<Typography>Je justifie mes absences</Typography>}>
-                                    <Button
-                                        component={Link} // Utilisez le composant Link comme base du bouton
-                                        to={`/admin/absences/${row.original.id}/justify`}
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center",
-                                            textDecoration: "none",
-                                            border:`1px solid  ${theme.palette.primary.main}`,
-                                            color: `${theme.palette.primary.main}`
-                                        }}
-                                        variant='outlined'
-                                    >
-                                        <PendingActions />
-                                        <Typography variant="span">Justifier</Typography>
-                                    </Button>
+                                        <PendingActions
+                                          style={{color: `${theme.palette.primary.main}`, cursor:'pointer'}}
+                                        />
                                 </Tooltip>
                             </div>
                         );
@@ -130,12 +123,30 @@ export default function Absences() {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page,
+        previousPage,
+        nextPage,
         prepareRow,
-    } = useTable({
-        columns,
-        data,
-    },useFilters,useSortBy);
+        state,
+        setGlobalFilter,
+        gotoPage,
+        pageCount,
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        setPageSize
+
+    } = useTable(
+      {
+          columns,
+          data: data, // Utilisez "data" au lieu de "datas"
+      },
+      useFilters,
+      useGlobalFilter,
+      useSortBy,
+      usePagination
+    );
+    const {globalFilter, pageIndex, pageSize} = state
     const handleSubmit = (values) =>{
         console.log(values)
     }
@@ -161,6 +172,43 @@ export default function Absences() {
                 </Grid>
             </Grid>
             <Paper elevation={1} style={{padding: '24px'}}>
+                <Box sx={{display:'flex',flexDirection:{xs:'column', md:'row'},gap:{xs:"8px", md:"16px"}, alignItems:'center', justifyContent:'space-between'}}>
+                    <SortableSelectTable sizes={[10,15,20]} pageSize={pageSize} setPageSize={setPageSize} />
+                    <Box sx={{width:{xs:"100%",md:"250px"}, marginRight: "auto"}}>
+                        <Formik
+                          initialValues={{ statut: '' }}
+                          onSubmit={handleSubmit}
+
+                        >
+                            {({ values, setFieldValue }) => (
+                              <Form>
+                                  <Field
+                                    as={TextField}
+                                    select
+                                    name="statut"
+                                    label="Filtez par statut"
+                                    variant="outlined"
+                                    value={values.statut || ''}
+                                    onChange={(e) => {
+                                        setFieldValue("statut", e.target.value);
+                                    }}
+                                    fullWidth
+                                    sx={{ height: '45px', '& .MuiInputBase-root ': {height: '45px'}}}
+                                  >
+                                      <MenuItem value=''>Filtez par statut</MenuItem>
+                                      {statusOptions.map((statut, key) => (
+                                        <MenuItem key={key} value={statut}>
+                                            {statut}
+                                        </MenuItem>
+                                      ))}
+                                  </Field>
+                              </Form>
+                            )
+                            }
+                        </Formik>
+                    </Box>
+                    <GlobalSearchInputTable filter={globalFilter} setFilter={setGlobalFilter} />
+                </Box>
                 <TableContainer>
                     <StyledTable {...getTableProps()} className="table">
                         <TableHead>
@@ -180,76 +228,7 @@ export default function Absences() {
                         <TableBody {...getTableBodyProps()}>
                             {!isLoading ? (
                                 <>
-                                    <StyledTableRow>
-                                        <StyledTableCell></StyledTableCell>
-                                        <StyledTableCell>
-                                            <Formik
-                                                initialValues={{ lessons: '' }}
-                                                onSubmit={handleSubmit}
-                                            >
-                                                {({ values, setFieldValue }) => (
-                                                    <Form>
-                                                        <Field
-                                                            as={TextField}
-                                                            select
-                                                            name="lesson"
-                                                            label="Filtrez par leçon"
-                                                            variant="outlined"
-                                                            value={values.lesson || ''}
-                                                            onChange={(e) => {
-                                                                setFieldValue("lesson", e.target.value);
-                                                            }}
-                                                            fullWidth
-                                                            sx={{ height: '45px', '& .MuiInputBase-root ': {height: '45px'}}}
-                                                        >
-                                                            <MenuItem value=''>Filtrez par leçon</MenuItem>
-                                                            {lessonsOptions.map((lesson, key) => (
-                                                                <MenuItem key={key} value={lesson}>
-                                                                    {lesson}
-                                                                </MenuItem>
-                                                            ))}
-                                                        </Field>
-                                                    </Form>
-                                                )
-                                                }
-                                            </Formik>
-                                        </StyledTableCell>
-                                        <StyledTableCell></StyledTableCell>
-                                        <StyledTableCell>
-                                            <Formik
-                                                initialValues={{ statut: '' }}
-                                                onSubmit={handleSubmit}
-                                            >
-                                                {({ values, setFieldValue }) => (
-                                                    <Form>
-                                                        <Field
-                                                            as={TextField}
-                                                            select
-                                                            name="statut"
-                                                            label="Filtez par statut"
-                                                            variant="outlined"
-                                                            value={values.statut || ''}
-                                                            onChange={(e) => {
-                                                                setFieldValue("statut", e.target.value);
-                                                            }}
-                                                            fullWidth
-                                                            sx={{ height: '45px', '& .MuiInputBase-root ': {height: '45px'}}}
-                                                        >
-                                                            <MenuItem value=''>Filtez par statut</MenuItem>
-                                                            {statusOptions.map((statut, key) => (
-                                                                <MenuItem key={key} value={statut}>
-                                                                    {statut}
-                                                                </MenuItem>
-                                                            ))}
-                                                        </Field>
-                                                    </Form>
-                                                )
-                                                }
-                                            </Formik>
-                                        </StyledTableCell>
-                                        <StyledTableCell></StyledTableCell>
-                                    </StyledTableRow>
-                                    {rows.map((row) => {
+                                    {page.map((row) => {
                                         prepareRow(row);
                                         return (
                                             <StyledTableRow {...row.getRowProps()}>
@@ -277,16 +256,21 @@ export default function Absences() {
                         </TableBody>
                     </StyledTable>
                 </TableContainer>
-                <Box sx={{margin:"24px auto"}}>
-                    {!isLoading?
-                        <Pagination count={2} color="primary"/>:
-                        <Skeleton
-                            className='skeleto-pagination'
-                            animation="wave"
-                            variant="rectangular"
-                            width={200}
-                            height={40}
-                        />}
+                <Box  sx={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                    <Box>
+                        Page{' '}
+                        <strong>
+                            {pageIndex + 1} of {pageOptions.length}
+                        </strong>{' '}
+                    </Box>
+                    <Pagination
+                      canPreviousPage={canPreviousPage}
+                      canNextPage={canNextPage}
+                      previousPage={previousPage}
+                      nextPage={nextPage}
+                      pageCount={pageCount}
+                      gotoPage={gotoPage}
+                    />
                 </Box>
             </Paper>
         </MainCard>

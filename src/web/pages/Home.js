@@ -9,9 +9,9 @@ import {
     Typography,
 } from '@mui/material';
 import '../assets/css/web/home.css';
-import img1 from '../assets/images/banner1.jpg';
-import img2 from '../assets/images/banner2.jpg';
-import promoteur from '../assets/images/promoteur.png';
+import img1 from '../assets/images/banner1.jpeg';
+import img2 from '../assets/images/banner2.avif';
+import promoteur from '../assets/images/promoteur.jpg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -235,10 +235,8 @@ export default function Home() {
                             <Grid xs={12} md={7} item className="wrapper-image-promoteur">
                                 <Box>
                                     <Typography variant="body2" color="var(--standard)">
-                                        Bienvenue aux étudiants du Cameroun sur EDUCAMER, votre
-                                        plateforme numérique qui simplifie la vie des étudiants! Nous
-                                        sommes honorés de vous offrir des services qui comblent vos
-                                        besoins tout au long de votre parcours.
+                                        Bienvenue à tous les étudiants sur SNAP U,  nous sommes honorés de vous offrir des  services qui comblent vos besoins tout au long de  votre parcours académique.
+                                        Nous sommes convaincus  que nos services amélioreront votre expérience  universitaire et nous sommes impatients de vous  accompagner sur ce voyage vers un avenir plus  lumineux !
                                     </Typography>
                                 </Box>
                             </Grid>

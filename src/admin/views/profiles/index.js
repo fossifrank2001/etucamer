@@ -58,7 +58,7 @@ function a11yProps(index) {
     };
 }
 
-function InfoField({ label, text }) {
+export function InfoField({ label, text }) {
     return (
         <Box sx={{marginBottom:'16px'}}>
             <Typography variant="subtitle1" component="strong">

@@ -164,6 +164,7 @@ export const levels =[
               beginDate: "12/09/2023",
               progression: 100,
               hours: 15,
+              teacher: "NOZAKAP FOSSI frank",
               ccIsProgramated: {
                 statut: false,
                 date: undefined,
@@ -183,6 +184,7 @@ export const levels =[
               beginDate: '06/01/2023',
               progression: 90,
               hours: 8,
+              teacher: "TINKEU DYRAN frank",
               ccIsProgramated: {
                 statut: false,
                 date: undefined,
@@ -202,9 +204,10 @@ export const levels =[
               beginDate: '12/09/2023',
               progression: 82,
               hours: 12,
+              teacher: "NGUETSA CHEBOU frank",
               ccIsProgramated: {
-                statut: false,
-                date: undefined,
+                statut: true,
+                date: '23/11/2023',
                 weight: 0.4,
                 max_score: 20
               },
@@ -225,6 +228,7 @@ export const levels =[
               lesson: 'Biologie',
               beginDate: '18/09/2023',
               hours: 35,
+              teacher: "TALLA KAZI Yvan",
               progression: 40,
               ccIsProgramated: {
                 statut: true,
@@ -245,6 +249,7 @@ export const levels =[
               beginDate: '21/09/2023',
               hours: 20,
               progression: 100,
+              teacher: "NANA KOFEKOU Alain",
               ccIsProgramated: {
                 statut: true,
                 date: '15/11/2023',

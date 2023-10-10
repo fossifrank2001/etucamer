@@ -46,7 +46,7 @@ const Dashboard = () => {
             </Grid>
           </Grid>
           <Grid item lg={9} md={12} sm={12} xs={12}>
-            <Paper elevation={0} sx={{borderRadius:'15px', paddingY:2}}>
+            <Paper elevation={0} sx={{borderRadius:'15px', padding:2}}>
               <ProgressingLessonTable isLoding={isLoading} data={progressionLessons} />
             </Paper>
           </Grid>

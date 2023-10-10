@@ -12,6 +12,9 @@ const CcComponent = Loadable(lazy(() => import('../views/programs/ContinuousMoni
 const ExamsComponent = Loadable(lazy(() => import('../views/programs/Exams')));
 const AbsencesComponent = Loadable(lazy(() => import('../views/absences')))
 const ProfilComponent = Loadable(lazy(() => import('../views/profiles')))
+
+//Dynamiques routes
+const ReadLessonComponent = Loadable(lazy(() => import('../views/programs/ReadLesson')))
 // ==============================|| ADMIN ROUTING ||============================== //
 const AdminRoutes = {
   path: '/admin',
@@ -36,7 +39,12 @@ const AdminRoutes = {
         {
           path: 'lessons',
           element: <LessonsComponent />
-        }
+        },
+        {
+          path: 'semester/:semester/lessons/:id', // Use a route parameter :semester
+          element: <ReadLessonComponent />
+        },
+
       ]
     },
     {

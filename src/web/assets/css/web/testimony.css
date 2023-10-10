@@ -3,7 +3,7 @@
     /*z-index: -1;*/
 }
 .swiper.swiper-initialized{
-    padding: 32px 0;
+    padding: 48px 16px;
     width: 90%;
     margin: 0 auto;
 }

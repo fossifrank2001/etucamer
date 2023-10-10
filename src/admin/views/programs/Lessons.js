@@ -27,6 +27,7 @@ import {
 
 
 const  Lessons = () => {
+  const [selectedSemester, setSelectedSemester] = useState(null)
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         awaitSync(5000).then(() => {
@@ -38,9 +39,11 @@ const  Lessons = () => {
     const [subjects, setSubjects] =useState(null);
     /**
      * @param {Object} subjects_
+     * @param {Number} semester_
      */
-    const navigateThroughtLesson = (subjects_)=>{
+    const navigateThroughtLesson = (subjects_, semester_)=>{
         setSubjects(subjects_)
+        setSelectedSemester(semester_)
     }
     const columns = useMemo(
         () => [
@@ -77,7 +80,7 @@ const  Lessons = () => {
                             <Tooltip title={<Typography>Plus de détails sur ce cour.</Typography>}>
                                 <Box>
                                     <IconEye
-                                        onClick={() => navigate(`/admin/lesson/${row.original.id}/view`)}
+                                        onClick={() => navigate(`/admin/programs/semester/${selectedSemester}/lessons/${row.original.id}`)}
                                         style={{
                                             display: "flex",
                                             justifyContent: "center",
@@ -94,7 +97,7 @@ const  Lessons = () => {
                 },
             },
         ],
-        []
+        [selectedSemester]
     );
 
     const datas = useMemo(() => subjects || [], [subjects]);
@@ -160,7 +163,7 @@ const  Lessons = () => {
                                             height:"75px"
                                         }}
                                         variant='outlined'
-                                        onClick={() => navigateThroughtLesson(semester.subjects)}
+                                        onClick={() => navigateThroughtLesson(semester.subjects, semester.number)}
                                     >Semetre{' '}{semester.number}</Button>
                                 </Grid>
                             )

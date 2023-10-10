@@ -155,13 +155,13 @@ export default function ProgressingLessonTable({ data, isLoading }) {
     const {globalFilter, pageIndex, pageSize} = state
     return (
         <>
+          <Box sx={{display:'flex', alignItems:'center', justifyContent:'space-between',flexDirection:{xs:'column', md:'row'}}}>
+            <SortableSelectTable sizes={[10,15,20]} pageSize={pageSize} setPageSize={setPageSize} />
+            <GlobalSearchInputTable filter={globalFilter} setFilter={setGlobalFilter} />
+          </Box>
             <TableContainer
                 sx={{ width: { xs: '100%', md: '98%' }, margin: '0 auto' }}
             >
-                <Box sx={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                    <SortableSelectTable sizes={[10,15,20]} pageSize={pageSize} setPageSize={setPageSize} />
-                    <GlobalSearchInputTable filter={globalFilter} setFilter={setGlobalFilter} />
-                </Box>
                 <StyledTable {...getTableProps()} className="table">
                     <TableHead>
                         {headerGroups.map((headerGroup) => (
@@ -204,23 +204,23 @@ export default function ProgressingLessonTable({ data, isLoading }) {
                         )}
                     </TableBody>
                 </StyledTable>
-               <Box  sx={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-                   <Box>
-                       Page{' '}
-                       <strong>
-                           {pageIndex + 1} of {pageOptions.length}
-                       </strong>{' '}
-                   </Box>
-                   <Pagination
-                       canPreviousPage={canPreviousPage}
-                       canNextPage={canNextPage}
-                       previousPage={previousPage}
-                       nextPage={nextPage}
-                       pageCount={pageCount}
-                       gotoPage={gotoPage}
-                   />
-               </Box>
             </TableContainer>
+          <Box  sx={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+            <Box>
+              Page{' '}
+              <strong>
+                {pageIndex + 1} of {pageOptions.length}
+              </strong>{' '}
+            </Box>
+            <Pagination
+              canPreviousPage={canPreviousPage}
+              canNextPage={canNextPage}
+              previousPage={previousPage}
+              nextPage={nextPage}
+              pageCount={pageCount}
+              gotoPage={gotoPage}
+            />
+          </Box>
         </>
     );
 }

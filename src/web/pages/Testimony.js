@@ -49,10 +49,10 @@ export default function Testimony() {
     ];
 
     const items = peoplesTestimony.map((testimony, key) => (
-        <SwiperSlide key={key}>
+        <SwiperSlide key={key} style={{borderRadius:"12px", boxShadow:"0 0 10px lightgray", marginBottom:'16px'}}>
             <Card className='card-testimony' sx={{ padding: '0px', margin: '0 10px', height: '100%' }} key={key}>
-            <Box sx={{ height: '200px' }}>
-                <img style={{ height: '100%', width: '100%' }} src={testimony.image} alt='test' />
+            <Box sx={{ height: '200px', display:'flex', justifyContent: "center", py:'10px' }}>
+                <img style={{ height: '200px', width: '200px', borderRadius:'50%' }} src={testimony.image} alt='test' />
             </Box>
             <CardContent sx={{ padding: '0!important' }}>
                 <Typography variant='body1'>{`"${testimony.description}"`}</Typography>

@@ -208,34 +208,47 @@ CustomizeSnackBar.propTypes = {
     }).isRequired,
 };
 
-export const CustomizeBreadcrumbs = ({ paths }) => {
-    // `paths` prop should be an array of objects, each representing a breadcrumb link
-    return (
-        <Breadcrumbs aria-label="breadcrumb">
-            {paths.map((path, index) => (
-                <Box key={index}>
-                    {path.link ? (
-                        <Link
-                            underline="hover"
-                            color="inherit"
-                            to={path.link}
-                            sx={{ display: "flex", alignItems: "center" }}
-                        >
-                            {path.icon}
-                            <Typography variant="span">{path.text}</Typography>
-                        </Link>
-                    ) : (
-                        <Typography
-                            sx={{ fontSize: "16px", color: "text.primary" }}
-                            key={index}
-                        >
-                            {path.text}
-                        </Typography>
-                    )}
-                </Box>
-            ))}
-        </Breadcrumbs>
-    );
+export const CustomizeBreadcrumbs = ({ paths, param, url }) => {
+  return (
+    <Breadcrumbs aria-label="breadcrumb">
+      {paths.slice(0, param ? -1 : undefined).map((path, index) => (
+        <Box key={index}>
+          {path.link ? (
+            <Link
+              underline="hover"
+              color="inherit"
+              to={path.link}
+              sx={{ display: 'flex', alignItems: 'center' }}
+            >
+              {path.icon}
+              <Typography variant="span">{path.text}</Typography>
+            </Link>
+          ) : (
+            <Typography
+              sx={{ fontSize: '16px', color: 'text.primary' }}
+              key={index}
+            >
+              {path.text}
+            </Typography>
+          )}
+        </Box>
+      ))}
+
+      {param && (
+        <Link
+          underline="hover"
+          color="inherit"
+          to={url}
+          sx={{ display: 'flex', alignItems: 'center' }}
+        >
+          {paths[paths.length - 1].icon}
+          <Typography variant="span">{paths[paths.length - 1].text}</Typography>
+        </Link>
+      )}
+
+      {param && <Typography variant="body1">{param}</Typography>}
+    </Breadcrumbs>
+  );
 };
 
 export const lessonsOptions = [

@@ -5,6 +5,8 @@
   --dark:#000;
   --danger: #9d1010;
   --success: #059605;
+  --standard-primary: #1777e1;
+  --standard-primary-hover: #035dbe;
 }
 
 *, body {
